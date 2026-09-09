@@ -1,0 +1,25 @@
+{
+  "name": "공직생활 INSIGHT LAB PRO",
+  "short_name": "INSIGHT LAB",
+  "description": "공무원 연수용 업무스타일·직무부담·상황판단 자기점검 앱",
+  "lang": "ko-KR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8f7",
+  "theme_color": "#0f6f6c",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
