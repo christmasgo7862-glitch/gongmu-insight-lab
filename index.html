@@ -38,6 +38,26 @@ a{color:var(--teal)}
 .resultActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}.resultActions .reportBtn{grid-column:1/-1}.actionBtn{width:100%;border:1px solid #b9cbc7;border-radius:16px;background:#fff;color:var(--deep);padding:15px;font-weight:950;font-size:15px;cursor:pointer}.actionBtn:hover{background:#f4f8f7}.reportTools{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0 0}.reportTools.forceVisible{display:grid!important;visibility:visible!important;opacity:1!important}.reportTools.forceVisible .actionBtn{display:block!important;visibility:visible!important;opacity:1!important}.reportTools .actionBtn{background:#fff}.reportToolsNote{text-align:center;margin:7px 0 0!important}
 .saveStatus{display:none;margin:8px 0 0;padding:10px 12px;border-radius:12px;background:#eef6f3;border:1px solid #c9ddd8;color:#355b56;font-size:12px}
 .saveStatus.show{display:block}
+.savedHomeBtn{width:100%;margin-top:10px;border:1px solid #b9cbc7;border-radius:14px;background:#f7faf9;color:var(--deep);padding:13px;font-weight:900;cursor:pointer}
+.savedHomeBtn.hidden{display:none}
+.savedPanel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;margin-top:16px;box-shadow:var(--shadow)}
+.savedPanelHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.savedPanelHead h2{margin:0;font-size:20px}
+.savedList{display:grid;gap:9px}
+.savedCard{border:1px solid var(--line);border-radius:16px;padding:14px;background:#fbfcfc}
+.savedCardTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.savedCard strong{display:block;font-size:15px}
+.savedMeta{font-size:11px;color:var(--muted);margin-top:4px}
+.savedCardBtns{display:flex;gap:7px;margin-top:10px}
+.savedCardBtns button{flex:1;border:1px solid #cbd8d5;border-radius:11px;padding:9px;background:#fff;color:var(--deep);font-weight:850;font-size:12px}
+.savedCardBtns .danger{color:#8a4e4e}
+.savedViewer{background:#fff;border:1px solid var(--line);border-radius:24px;padding:16px;margin-top:16px;box-shadow:var(--shadow)}
+.savedViewerTop{display:flex;gap:8px;margin-bottom:12px}
+.savedViewerTop button{border:1px solid #cbd8d5;border-radius:12px;padding:10px 12px;background:#fff;font-weight:850;color:var(--deep)}
+.savedViewerBody .reportTools,.savedViewerBody .reportToolsNote,.savedViewerBody .resultActions,.savedViewerBody button{display:none!important}
+.savedViewerBody .reportSheet{display:block!important}
+.saveStatus{transition:.15s ease}
+
 
 
 .nextTestBtn{grid-column:1/-1;width:100%;border:1px solid #b89a69;border-radius:16px;background:#fbf6ed;color:#765522;padding:16px;font-weight:950;font-size:15px;cursor:pointer}
@@ -168,7 +188,7 @@ a{color:var(--teal)}
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V15</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V15 · SAVE ONLY</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V16</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V16 · IN-APP SAVE</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -196,9 +216,11 @@ a{color:var(--teal)}
           <button type="button" class="startChoice" id="proStart" onclick="window.__pplStart('pro')">Professional 검사 시작</button>
         </div>
       </div>
+      <button type="button" class="savedHomeBtn hidden" id="savedHomeBtn">저장된 결과 보기</button>
+      <p class="fine"><b>저장 방식:</b> 저장하기를 누르면 결과가 이 기기의 현재 브라우저에 보관됩니다. 다운로드 폴더를 사용하지 않으며, 다음에 같은 브라우저로 접속해 다시 볼 수 있습니다.</p>
       <p class="fine">※ 본 도구는 교육·연수·자기이해를 위한 업무성향 자기점검 도구입니다. 채용·승진·배치·인사평가·의학적 진단 등 고위험 결정에는 사용하지 마세요.</p>
       <p class="fine"><b>휴대폰 사용 안내:</b> 다운로드한 index.html을 파일 앱에서 직접 열지 말고, GitHub Pages처럼 배포된 웹주소에서 실행하세요. 일부 휴대폰 파일 뷰어는 JavaScript 버튼 동작을 제한합니다.</p>
-      <p class="fine"><b>개인정보 설계:</b> 이름 입력은 선택이며, 검사 응답과 결과는 브라우저 안에서만 계산됩니다. 앱 자체 서버로 응답을 전송하거나 저장하지 않습니다.</p>
+      <p class="fine"><b>개인정보 설계:</b> 이름 입력은 선택이며, 검사 응답과 결과는 브라우저 안에서 계산됩니다. 사용자가 ‘저장하기’를 누른 결과만 현재 기기의 브라우저 저장공간에 보관되며, 앱 자체 서버로 전송되지는 않습니다.</p>
 
       <details class="evidence">
         <summary>설계 근거 · 출처 · 검증 한계 보기</summary>
@@ -219,10 +241,27 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V15는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V16은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
+  </section>
+
+  <section id="savedPanel" class="savedPanel hidden">
+    <div class="savedPanelHead">
+      <h2>저장된 결과</h2>
+      <button type="button" class="actionBtn" id="savedPanelClose" style="width:auto;padding:9px 12px">닫기</button>
+    </div>
+    <div class="savedList" id="savedList"></div>
+    <p class="fine">※ 결과는 이 브라우저에만 저장됩니다. 브라우저 데이터·사이트 데이터를 삭제하면 저장된 결과도 함께 삭제될 수 있습니다.</p>
+  </section>
+
+  <section id="savedViewer" class="savedViewer hidden">
+    <div class="savedViewerTop">
+      <button type="button" id="savedViewerBack">← 저장 목록</button>
+      <button type="button" id="savedViewerHome">처음 화면</button>
+    </div>
+    <div class="savedViewerBody" id="savedViewerBody"></div>
   </section>
 
   <section id="test" class="hidden">
@@ -262,7 +301,7 @@ a{color:var(--teal)}
         <button type="button" class="actionBtn" id="saveBtn">저장하기</button>
         <button type="button" class="nextTestBtn hidden" id="reportNextTestBtn"></button>
       </div>
-      <p class="fine reportToolsNote" id="reportToolsNote">저장하기를 누르면 현재 결과 검사지가 파일로 저장됩니다.</p>
+      <p class="fine reportToolsNote" id="reportToolsNote">저장하기를 누르면 현재 결과 검사지가 이 기기의 브라우저에 저장됩니다.</p>
       <div class="saveStatus" id="saveStatus"></div>
       <div class="finalIntegrated hidden" id="finalIntegrated">
         <div class="finalBadge">QUICK + PROFESSIONAL · FINAL</div>
@@ -493,6 +532,70 @@ $('saveBtn').onclick=()=>{syncReportControls();saveCurrentReport();};
 $('reportNextTestBtn').onclick=()=>start(mode==='quick'?'pro':'quick');
 
 
+
+function showHome(){
+  document.body.classList.remove('testing');
+  $('test').classList.add('hidden');
+  $('result').classList.add('hidden');
+  $('savedPanel').classList.add('hidden');
+  $('savedViewer').classList.add('hidden');
+  $('intro').classList.remove('hidden');
+  refreshSavedHomeButton();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+function renderSavedList(){
+  const list=$('savedList');
+  const arr=getSavedReports();
+  if(!arr.length){
+    list.innerHTML='<div class="callout">아직 저장된 결과가 없습니다.</div>';
+    return;
+  }
+  list.innerHTML=arr.map(x=>`
+    <div class="savedCard" data-id="${x.id}">
+      <div class="savedCardTop">
+        <div><strong>${escapeHtml(x.title)}</strong><div class="savedMeta">${escapeHtml(x.nickname||'이름 미입력')} · ${escapeHtml(x.displayDate||'')}</div></div>
+      </div>
+      <div class="savedCardBtns">
+        <button type="button" data-view="${x.id}">보기</button>
+        <button type="button" class="danger" data-delete="${x.id}">삭제</button>
+      </div>
+    </div>`).join('');
+  list.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>viewSavedReport(b.dataset.view));
+  list.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>deleteSavedReport(b.dataset.delete));
+}
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+function openSavedPanel(){
+  document.body.classList.remove('testing');
+  $('intro').classList.add('hidden');
+  $('test').classList.add('hidden');
+  $('result').classList.add('hidden');
+  $('savedViewer').classList.add('hidden');
+  $('savedPanel').classList.remove('hidden');
+  renderSavedList();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+function viewSavedReport(id){
+  const item=getSavedReports().find(x=>x.id===id);
+  if(!item)return;
+  $('savedPanel').classList.add('hidden');
+  $('savedViewer').classList.remove('hidden');
+  $('savedViewerBody').innerHTML=`<div class="reportHeader"><div class="code">SAVED RESULT</div><h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.displayDate||'')}</p></div><section class="reportSheet">${item.html}</section>`;
+  window.scrollTo({top:0,behavior:'auto'});
+}
+function deleteSavedReport(id){
+  const arr=getSavedReports().filter(x=>x.id!==id);
+  setSavedReports(arr);
+  renderSavedList();
+}
+$('savedHomeBtn').onclick=openSavedPanel;
+$('savedPanelClose').onclick=showHome;
+$('savedViewerBack').onclick=openSavedPanel;
+$('savedViewerHome').onclick=showHome;
+refreshSavedHomeButton();
+
+
 window.__pplStart=start;
 function start(m){
   mode=m;questions=m==='pro'?pro:quick;answers=Array(questions.length).fill(null);idx=0;
@@ -518,69 +621,76 @@ function consistency(){if(mode!=='pro')return null;const pairs={};questions.forE
 function profileType(axes){const sorted=Object.entries(axes).sort((a,b)=>b[1]-a[1]),vals=sorted.map(x=>x[1]),range=vals[0]-vals[5],topSpread=vals[0]-vals[2],isBalanced=range<=14&&topSpread<=7;const pairs=detailedProfiles.map(p=>({p,raw:axes[p.primary]*.68+axes[p.secondary]*.32+(axes[p.primary]>=axes[p.secondary]?2:0)})).sort((a,b)=>b.raw-a.raw);let main,top3;if(isBalanced){main={...balancedProfile,primary:sorted[0][0],secondary:sorted[1][0]};top3=[{p:main,raw:Math.round(100-range/2)},pairs[0],pairs.find(x=>x.p.name!==pairs[0].p.name)]}else{main=pairs[0].p;top3=[];const seen=new Set();for(const x of pairs){if(!seen.has(x.p.name)){top3.push(x);seen.add(x.p.name)}if(top3.length===3)break}}return{sorted,main,top3,isBalanced};}
 
 
-function safeFileName(s){
- return (s||'퍼스널_공직생활').replace(/[\\/:*?"<>|]/g,'_').replace(/\s+/g,'_').slice(0,80);
+
+
+
+
+const SAVED_KEY='ppl_saved_reports_v16';
+function getSavedReports(){
+  try{
+    const raw=localStorage.getItem(SAVED_KEY);
+    const arr=raw?JSON.parse(raw):[];
+    return Array.isArray(arr)?arr:[];
+  }catch(_){return [];}
 }
-function isMobileDevice(){
-  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia('(max-width: 760px)').matches);
+function setSavedReports(arr){
+  localStorage.setItem(SAVED_KEY,JSON.stringify(arr.slice(0,20)));
+  refreshSavedHomeButton();
 }
-
-
-
-
+function refreshSavedHomeButton(){
+  const b=$('savedHomeBtn'); if(!b)return;
+  const n=getSavedReports().length;
+  if(n){
+    b.classList.remove('hidden');
+    b.textContent=`저장된 결과 보기 (${n})`;
+  }else{
+    b.classList.add('hidden');
+  }
+}
 function saveCurrentReport(){
  try{
    const report=$('reportSheet').cloneNode(true);
    report.classList.remove('hidden');
    report.querySelectorAll('button,.resultActions,.reportTools,.reportToolsNote,.nextTestBtn,.saveStatus').forEach(el=>el.remove());
-   const css=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');
    const nick=$('nickname').value.trim();
    const current=completed[mode];
    const bothDone=!!(completed.quick&&completed.pro);
    const integrated=bothDone?buildIntegratedResult():null;
    const typeName=integrated?.main?.name||current?.mainName||$('resultTitle').textContent||'결과';
-   const edition=bothDone?'Quick+Professional_최종통합':(mode==='pro'?'Professional':'Quick');
-   const title=`퍼스널 공직생활 프로파일 ${edition} 결과 - ${typeName}`;
-   const savedAt=new Date().toLocaleString('ko-KR');
-   const doc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><style>${css}
-body{background:#fff!important}.app{max-width:920px;margin:0 auto;padding:20px}.reportSheet{display:block!important}
-</style></head><body><div class="app"><div style="margin:0 0 16px;padding:12px 14px;border:1px solid #dce4e2;border-radius:12px;font-size:12px;color:#667472"><b>${title}</b><br>저장일시: ${savedAt}</div>${report.outerHTML}</div></body></html>`;
-   const who=nick?`_${safeFileName(nick)}`:'';
-   const filename=`퍼스널_공직생활_프로파일_${safeFileName(edition)}${who}_${safeFileName(typeName)}_결과.html`;
+   const edition=bothDone?'Quick + Professional 최종 통합':(mode==='pro'?'Professional':'Quick');
+   const title=`${edition} · ${typeName}`;
+   const now=new Date();
+   const item={
+     id:String(now.getTime())+'_'+Math.random().toString(36).slice(2,7),
+     savedAt:now.toISOString(),
+     displayDate:now.toLocaleString('ko-KR'),
+     title,
+     edition,
+     typeName,
+     nickname:nick,
+     html:report.innerHTML
+   };
+   const arr=getSavedReports();
+   arr.unshift(item);
+   setSavedReports(arr);
    const status=$('saveStatus');
-   if(status){status.textContent='저장 중…';status.classList.add('show');}
-
-   // application/octet-stream 으로 강제 다운로드를 유도.
-   // 사용자 클릭 이벤트 안에서 즉시 실행해 모바일 브라우저의 다운로드 허용 조건을 만족시킨다.
-   const blob=new Blob(["\ufeff",doc],{type:'application/octet-stream'});
-   const url=URL.createObjectURL(blob);
-   const a=document.createElement('a');
-   a.href=url;
-   a.download=filename;
-   a.setAttribute('download',filename);
-   a.style.display='none';
-   document.body.appendChild(a);
-   a.click();
-
-   setTimeout(()=>{
-     try{a.remove();URL.revokeObjectURL(url);}catch(_){}
-   },30000);
-
    if(status){
-     status.textContent='저장 요청을 완료했습니다.';
-     setTimeout(()=>status.classList.remove('show'),1800);
+     status.textContent='저장되었습니다. 첫 화면의 “저장된 결과 보기”에서 다시 확인할 수 있습니다.';
+     status.classList.add('show');
+     setTimeout(()=>status.classList.remove('show'),2200);
+   }
+   if(navigator.storage && navigator.storage.persist){
+     navigator.storage.persist().catch(()=>{});
    }
  }catch(err){
    const status=$('saveStatus');
    if(status){
-     status.textContent='저장을 완료하지 못했습니다.';
+     status.textContent='이 브라우저에서 저장공간을 사용할 수 없습니다.';
      status.classList.add('show');
-     setTimeout(()=>status.classList.remove('show'),2200);
+     setTimeout(()=>status.classList.remove('show'),2500);
    }
  }
 }
-
-
 function buildIntegratedResult(){
  const qr=completed.quick,pr=completed.pro;
  if(!qr||!pr)return null;
