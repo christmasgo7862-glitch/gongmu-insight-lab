@@ -36,6 +36,9 @@ a{color:var(--teal)}
 @media(max-width:760px){h1{font-size:30px}.hero{padding:23px}.modegrid,.topTypes,.scoregrid,.detailGrid{grid-template-columns:1fr}.qcard{padding:21px}.qtext{font-size:19px}.scale{grid-template-columns:1fr}.opt{min-height:auto;text-align:left;display:flex;gap:11px;align-items:center;padding:12px 14px}.opt b{width:24px}.axis{grid-template-columns:95px 1fr 38px}.modecard{min-height:auto}.recommend{position:static;display:inline-block;margin-bottom:7px}}
 
 .resultActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}.resultActions .reportBtn{grid-column:1/-1}.actionBtn{width:100%;border:1px solid #b9cbc7;border-radius:16px;background:#fff;color:var(--deep);padding:15px;font-weight:950;font-size:15px;cursor:pointer}.actionBtn:hover{background:#f4f8f7}.reportTools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 0}.reportTools.forceVisible{display:grid!important;visibility:visible!important;opacity:1!important}.reportTools.forceVisible .actionBtn{display:block!important;visibility:visible!important;opacity:1!important}.reportTools .actionBtn{background:#fff}.reportToolsNote{text-align:center;margin:7px 0 0!important}
+.saveStatus{display:none;margin:8px 0 0;padding:10px 12px;border-radius:12px;background:#eef6f3;border:1px solid #c9ddd8;color:#355b56;font-size:12px}
+.saveStatus.show{display:block}
+
 .nextTestBtn{grid-column:1/-1;width:100%;border:1px solid #b89a69;border-radius:16px;background:#fbf6ed;color:#765522;padding:16px;font-weight:950;font-size:15px;cursor:pointer}
 .finalIntegrated{margin-top:14px;border:1px solid #b9d0cb;background:linear-gradient(135deg,#eef6f3,#fff 58%,#faf4e9);border-radius:24px;padding:21px;box-shadow:var(--shadow)}
 .finalBadge{display:inline-flex;padding:6px 10px;border-radius:999px;background:var(--deep);color:#fff;font-size:10px;font-weight:950;letter-spacing:.08em}
@@ -164,7 +167,7 @@ a{color:var(--teal)}
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V14</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V14 · MOBILE COMPACT TEST</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V14.2</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V14.2 · MOBILE SAVE FIX</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -260,6 +263,7 @@ a{color:var(--teal)}
         <button type="button" class="nextTestBtn hidden" id="reportNextTestBtn"></button>
       </div>
       <p class="fine reportToolsNote" id="reportToolsNote">출력하기는 브라우저 인쇄창을 엽니다. 인쇄창에서 PDF 저장도 가능하며, 저장하기는 결과 검사지를 HTML 파일로 기기에 저장합니다.</p>
+      <div class="saveStatus" id="saveStatus"></div>
       <div class="finalIntegrated hidden" id="finalIntegrated">
         <div class="finalBadge">QUICK + PROFESSIONAL · FINAL</div>
         <h3 id="finalTypeTitle"></h3>
@@ -525,7 +529,7 @@ function saveCurrentReport(){
  try{
    const report=$('reportSheet').cloneNode(true);
    report.classList.remove('hidden');
-   report.querySelectorAll('button,.resultActions,.reportTools,.reportToolsNote,.nextTestBtn').forEach(el=>el.remove());
+   report.querySelectorAll('button,.resultActions,.reportTools,.reportToolsNote,.nextTestBtn,.saveStatus').forEach(el=>el.remove());
    const css=[...document.querySelectorAll('style')].map(s=>s.textContent).join('\n');
    const nick=$('nickname').value.trim();
    const current=completed[mode];
@@ -538,18 +542,64 @@ function saveCurrentReport(){
    const doc=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title><style>${css}
 body{background:#fff!important}.app{max-width:920px;margin:0 auto;padding:20px}.reportSheet{display:block!important}
 </style></head><body><div class="app"><div style="margin:0 0 16px;padding:12px 14px;border:1px solid #dce4e2;border-radius:12px;font-size:12px;color:#667472"><b>${title}</b><br>저장일시: ${savedAt}</div>${report.outerHTML}</div></body></html>`;
-   const blob=new Blob([doc],{type:'text/html;charset=utf-8'});
+   const who=nick?`_${safeFileName(nick)}`:'';
+   const filename=`퍼스널_공직생활_프로파일_${safeFileName(edition)}${who}_${safeFileName(typeName)}_결과.html`;
+   const status=$('saveStatus');
+   if(status){status.textContent='저장을 준비하고 있습니다…';status.classList.add('show');}
+
+   const blob=new Blob(["\ufeff",doc],{type:'text/html;charset=utf-8'});
+   const file=new File([blob],filename,{type:'text/html;charset=utf-8'});
+
+   // 1) 모바일에서 파일 공유/저장이 가능한 경우 네이티브 저장 시트 사용
+   if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+     navigator.share({
+       title:title,
+       text:'퍼스널 공직생활 결과 파일입니다.',
+       files:[file]
+     }).then(()=>{
+       if(status){status.textContent='저장/공유 창을 열었습니다. “내 파일” 또는 “파일에 저장”을 선택하세요.';}
+     }).catch(err=>{
+       if(err && err.name==='AbortError'){
+         if(status){status.textContent='저장이 취소되었습니다.';}
+       }else{
+         fallbackDownload(blob,filename,status);
+       }
+     });
+     return;
+   }
+
+   // 2) 일반 브라우저 다운로드 방식
+   fallbackDownload(blob,filename,status);
+ }catch(err){
+   const status=$('saveStatus');
+   if(status){status.textContent='이 브라우저에서는 직접 저장이 제한됩니다. “출력하기” → PDF로 저장을 이용해 주세요.';status.classList.add('show');}
+   else alert('이 브라우저에서는 직접 저장이 제한됩니다. 출력하기 → PDF로 저장을 이용해 주세요.');
+ }
+}
+
+function fallbackDownload(blob,filename,status){
+ try{
    const url=URL.createObjectURL(blob);
    const a=document.createElement('a');
    a.href=url;
-   const who=nick?`_${safeFileName(nick)}`:'';
-   a.download=`퍼스널_공직생활_프로파일_${safeFileName(edition)}${who}_${safeFileName(typeName)}_결과.html`;
+   a.download=filename;
+   a.rel='noopener';
+   a.style.display='none';
    document.body.appendChild(a);
    a.click();
-   a.remove();
-   setTimeout(()=>URL.revokeObjectURL(url),1500);
+   // 모바일 브라우저가 다운로드를 시작할 시간을 충분히 줌
+   setTimeout(()=>{
+     try{a.remove();URL.revokeObjectURL(url);}catch(_){}
+   },10000);
+   if(status){
+     status.textContent='다운로드를 요청했습니다. 파일이 보이지 않으면 브라우저 메뉴의 “다운로드”를 확인하거나 “출력하기 → PDF 저장”을 이용해 주세요.';
+     status.classList.add('show');
+   }
  }catch(err){
-   alert('저장 중 문제가 발생했습니다. 출력하기를 눌러 인쇄창에서 PDF로 저장해 주세요.');
+   if(status){
+     status.textContent='직접 다운로드가 제한된 브라우저입니다. “출력하기” → PDF 저장을 이용해 주세요.';
+     status.classList.add('show');
+   }
  }
 }
 
