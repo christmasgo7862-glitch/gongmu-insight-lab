@@ -66,12 +66,105 @@ a{color:var(--teal)}
   .resultActions,.compareMetrics,.compareTypes,.reportTools,.finalMiniGrid{grid-template-columns:1fr}
 }
 
+
+/* V14 모바일 검사 화면 최적화:
+   검사 중에는 상단 브랜드를 숨기고, 한 화면에 문항·5개 선택지·다음 버튼이 들어오도록 압축 */
+@media(max-width:760px){
+  body.testing{background:#f4f7f6}
+  body.testing .topbar{display:none!important}
+  body.testing .app{padding:7px 8px 20px;max-width:none}
+  body.testing #test{min-height:100dvh}
+  body.testing .progressHead{padding:2px 4px 0;align-items:center}
+  body.testing .progressHead strong{font-size:14px;line-height:1.2}
+  body.testing .progressHead span{font-size:11px}
+  body.testing .bar{height:6px;margin-top:6px}
+  body.testing .stageStrip{margin-top:7px;gap:5px;flex-wrap:nowrap;overflow:hidden}
+  body.testing .stageStrip span{flex:1;text-align:center;white-space:nowrap;font-size:10px;padding:6px 4px}
+  body.testing .qcard{
+    margin-top:9px;
+    border-radius:22px;
+    padding:14px 13px 13px;
+    min-height:0;
+    box-shadow:0 10px 28px rgba(19,54,51,.07)
+  }
+  body.testing .qmeta{font-size:11px}
+  body.testing .qtag{padding:5px 8px}
+  body.testing .qtext{
+    font-size:18px;
+    line-height:1.35;
+    margin:13px 0 12px;
+    letter-spacing:-.03em
+  }
+  body.testing .hint{
+    font-size:11px;
+    line-height:1.4;
+    margin-top:-5px;
+    margin-bottom:10px
+  }
+  body.testing .scale{display:grid;grid-template-columns:1fr;gap:6px}
+  body.testing .opt{
+    min-height:0;
+    padding:9px 12px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-align:left
+  }
+  body.testing .opt b{
+    width:28px;
+    flex:0 0 28px;
+    font-size:16px;
+    line-height:1.2
+  }
+  body.testing .opt small{
+    font-size:12px;
+    line-height:1.2
+  }
+  body.testing .sjt{gap:6px}
+  body.testing .sjtbtn{
+    padding:10px 11px;
+    border-radius:13px;
+    font-size:12px;
+    line-height:1.35
+  }
+  body.testing .sjtbtn b{
+    width:23px;height:23px;margin-right:5px;font-size:11px
+  }
+  body.testing .nav{
+    margin-top:8px;
+    gap:8px;
+    position:sticky;
+    bottom:6px;
+    z-index:5;
+    background:rgba(244,247,246,.96);
+    padding-top:4px
+  }
+  body.testing .nav button{
+    padding:10px 12px;
+    border-radius:13px;
+    min-height:44px;
+    font-size:14px
+  }
+}
+
+/* 아주 낮은 화면에서도 다음 버튼까지 최대한 보이도록 한 단계 더 압축 */
+@media(max-width:760px) and (max-height:760px){
+  body.testing .stageStrip span{font-size:9px;padding:5px 3px}
+  body.testing .qcard{padding:11px 11px 10px;margin-top:7px}
+  body.testing .qtext{font-size:16px;margin:10px 0 9px}
+  body.testing .hint{font-size:10px;margin-bottom:7px}
+  body.testing .scale{gap:4px}
+  body.testing .opt{padding:7px 10px}
+  body.testing .nav{margin-top:6px}
+}
+
 @media print{body{background:#fff}.topbar,#intro,#test,#resultSummary,.reportBtn,.actionBtn,.otherModeBtn,.nextTestBtn,.resultActions,.reportTools,.reportToolsNote{display:none!important}.app{max-width:none}.panel,.reportHeader{box-shadow:none}.reportSheet{display:block!important}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V13</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V13 · FINAL REPORT CONTROLS FIXED</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V14</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V14 · MOBILE COMPACT TEST</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -122,7 +215,7 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V13은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V14는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
@@ -403,16 +496,19 @@ $('reportNextTestBtn').onclick=()=>start(mode==='quick'?'pro':'quick');
 window.__pplStart=start;
 function start(m){
   mode=m;questions=m==='pro'?pro:quick;answers=Array(questions.length).fill(null);idx=0;
+  document.body.classList.add('testing');
   $('reportSheet').classList.add('hidden');
   $('reportBtn').classList.remove('hidden');
   const tools=$('reportTools'); if(tools){tools.classList.remove('forceVisible');tools.style.display='';}
-  $('intro').classList.add('hidden');$('result').classList.add('hidden');$('test').classList.remove('hidden');renderQ();
+  $('intro').classList.add('hidden');$('result').classList.add('hidden');$('test').classList.remove('hidden');
+  renderQ();
+  window.scrollTo({top:0,behavior:'auto'});
 }
 function stages(){return [...new Set(questions.map(x=>x.stage))];}
 function renderQ(){const item=questions[idx];$('stageName').textContent=item.stage;$('progressText').textContent=`${mode==='pro'?'Professional':'Quick'} · ${idx+1} / ${questions.length}`;$('progressBar').style.width=`${((idx+1)/questions.length)*100}%`;
  const ss=stages();$('stageStrip').innerHTML=ss.map(x=>`<span class="${x===item.stage?'active':''}">${x}</span>`).join('');$('qTag').textContent=item.tag;$('qNo').textContent=`Q${idx+1}`;$('qText').textContent=item.text;$('qHint').textContent=item.kind==='sjt'?'정답은 없습니다. 실제로 가장 가까운 대응을 고르세요.':'최근 3~6개월의 평소 업무 모습을 기준으로 답하세요. 정답은 없습니다.';
  const area=$('answerArea');area.innerHTML='';if(item.kind==='sjt'){const wrap=document.createElement('div');wrap.className='sjt';item.opts.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='sjtbtn'+(answers[idx]===i?' sel':'');b.innerHTML=`<b>${String.fromCharCode(65+i)}</b>${o[0]}`;b.addEventListener('click',()=>{answers[idx]=i;renderQ();});wrap.appendChild(b)});area.appendChild(wrap)}else{const wrap=document.createElement('div');wrap.className='scale';scaleLabels.forEach(([n,t],i)=>{const b=document.createElement('button');b.type='button';b.className='opt'+(answers[idx]===i+1?' sel':'');b.innerHTML=`<b>${n}</b><small>${t}</small>`;b.addEventListener('click',()=>{answers[idx]=i+1;renderQ();});wrap.appendChild(b)});area.appendChild(wrap)}
- $('prevBtn').disabled=idx===0;$('nextBtn').disabled=answers[idx]==null;$('nextBtn').textContent=idx===questions.length-1?'결과 보기':'다음';window.scrollTo({top:0,behavior:'smooth'});}
+ $('prevBtn').disabled=idx===0;$('nextBtn').disabled=answers[idx]==null;$('nextBtn').textContent=idx===questions.length-1?'결과 보기':'다음';window.scrollTo({top:0,behavior:document.body.classList.contains('testing')?'auto':'smooth'});}
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 function scoreLikert(){const sums={},counts={};Object.keys(axisNames).forEach(k=>{sums[k]=0;counts[k]=0});const ss={},sc={};Object.keys(stressNames).forEach(k=>{ss[k]=0;sc[k]=0});
  questions.forEach((item,i)=>{if(item.kind!=='scale')return;let v=answers[i]??3;if(item.rev)v=6-v;if(item.axis){sums[item.axis]+=v;counts[item.axis]++}if(item.stress){ss[item.stress]+=v;sc[item.stress]++}});
@@ -596,6 +692,7 @@ function renderDualComparison(){
 }
 
 function finish(){ 
+ document.body.classList.remove('testing');
  $('test').classList.add('hidden');$('result').classList.remove('hidden');$('reportSheet').classList.add('hidden');$('reportBtn').classList.remove('hidden');$('finalIntegrated').classList.add('hidden');
  const rt=$('reportTools'); if(rt){rt.classList.remove('hidden');rt.classList.remove('forceVisible');rt.style.display='';}
  const pb=$('printBtn'),sb=$('saveBtn'); if(pb){pb.classList.remove('hidden');pb.style.display='';pb.disabled=false;} if(sb){sb.classList.remove('hidden');sb.style.display='';sb.disabled=false;}
@@ -641,7 +738,7 @@ function finish(){
  $('methodSummary').innerHTML=`<h3>${edition} 해석 원칙</h3><ul><li>유형명은 6개 연속 점수의 상위 두 축 조합을 기억하기 쉽게 표현한 것입니다.</li><li>${mode==='pro'?'Professional은 36개 성향문항 + 12개 스트레스문항 + 6개 상황판단문항을 사용하며, 상황판단은 성향 점수에 소폭 반영됩니다.':'Quick은 20개 성향문항 + 10개 스트레스문항으로 빠르게 추정합니다.'}</li><li>프로파일 선명도는 상위 축 간 차이와 ${cons!=null?'응답 일관성':'간편판 문항수'}를 이용한 내부 해석지표이며, 통계적 신뢰도 계수나 표준점수가 아닙니다.</li><li>31유형과 문항은 퍼스널 공직생활의 자체 구성 체계입니다. 특정 직무 지식을 요구하지 않으며, Big Five·KOSS·TCI·MBTI 등 기존 검사의 문항이나 점수체계를 복제하지 않습니다.</li></ul><p><b>근거 프레임:</b> KOSHA GUIDE E-G-2-2025, Pletzer & Abrahams (2025), Kepes et al. (2024/2025), WHO (2022), ISO 45003:2021, Khalid & Syed (2024), AERA/APA/NCME의 현행 Testing Standards와 개정 절차를 설계 참고자료로 사용했습니다. 이 근거들은 설계 원칙을 뒷받침하지만, 자체 31유형의 타당화를 대신하지는 않습니다.</p>`;
  if(completed.quick&&completed.pro){renderFinalIntegratedReport();}
  syncReportControls();
- window.scrollTo({top:0,behavior:'smooth'});
+ window.scrollTo({top:0,behavior:document.body.classList.contains('testing')?'auto':'smooth'});
 }
 })();
 </script>
