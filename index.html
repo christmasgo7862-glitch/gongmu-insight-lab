@@ -167,7 +167,7 @@ a{color:var(--teal)}
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V14.2</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V14.2 · MOBILE SAVE FIX</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V14.3</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V14.3 · MOBILE PDF SAVE</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -262,7 +262,7 @@ a{color:var(--teal)}
         <button type="button" class="actionBtn" id="saveBtn">저장하기</button>
         <button type="button" class="nextTestBtn hidden" id="reportNextTestBtn"></button>
       </div>
-      <p class="fine reportToolsNote" id="reportToolsNote">출력하기는 브라우저 인쇄창을 엽니다. 인쇄창에서 PDF 저장도 가능하며, 저장하기는 결과 검사지를 HTML 파일로 기기에 저장합니다.</p>
+      <p class="fine reportToolsNote" id="reportToolsNote">출력하기는 인쇄 화면을 엽니다. 저장하기는 PC에서는 결과 파일로 저장하고, 휴대폰에서는 안정적인 PDF 저장 화면을 엽니다.</p>
       <div class="saveStatus" id="saveStatus"></div>
       <div class="finalIntegrated hidden" id="finalIntegrated">
         <div class="finalBadge">QUICK + PROFESSIONAL · FINAL</div>
@@ -494,7 +494,22 @@ $('printBtn').onclick=()=>{
   syncReportControls();
   setTimeout(()=>window.print(),120);
 };
-$('saveBtn').onclick=()=>{syncReportControls();saveCurrentReport();};
+$('saveBtn').onclick=()=>{
+  syncReportControls();
+  if(isMobileDevice()){
+    const status=$('saveStatus');
+    if(status){
+      status.textContent='휴대폰에서는 자동 다운로드 대신 PDF 저장 방식으로 저장합니다. 잠시 후 열리는 인쇄 화면에서 “PDF로 저장”을 선택해 주세요.';
+      status.classList.add('show');
+    }
+    setTimeout(()=>{
+      alert('휴대폰 저장 방법\n\n1. 다음 화면에서 프린터 선택 부분을 누릅니다.\n2. “PDF로 저장”을 선택합니다.\n3. 저장 버튼을 눌러 다운로드 또는 원하는 폴더에 저장하세요.');
+      setTimeout(()=>window.print(),100);
+    },120);
+  }else{
+    saveCurrentReport();
+  }
+};
 $('reportNextTestBtn').onclick=()=>start(mode==='quick'?'pro':'quick');
 
 window.__pplStart=start;
@@ -525,6 +540,10 @@ function profileType(axes){const sorted=Object.entries(axes).sort((a,b)=>b[1]-a[
 function safeFileName(s){
  return (s||'퍼스널_공직생활').replace(/[\\/:*?"<>|]/g,'_').replace(/\s+/g,'_').slice(0,80);
 }
+function isMobileDevice(){
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia('(max-width: 760px)').matches);
+}
+
 function saveCurrentReport(){
  try{
    const report=$('reportSheet').cloneNode(true);
