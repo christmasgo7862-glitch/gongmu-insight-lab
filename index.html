@@ -515,11 +515,150 @@ a{color:var(--teal)}
   .growthTag{grid-column:2}
 }
 
+
+/* V23 · stronger visual hierarchy */
+:root{
+  --v23-deep:#0b4f4a;
+  --v23-teal:#0f8177;
+  --v23-mint:#eaf7f3;
+  --v23-blue:#3d8bd6;
+  --v23-orange:#e6813f;
+  --v23-purple:#745bd8;
+  --v23-gold:#d99a24;
+  --v23-ink:#123936;
+  --v23-soft:#f7fbfa;
+}
+#result{background:linear-gradient(180deg,#eef7f4 0,#f8fbfa 220px,#f1f6f4 100%)}
+#result .app, #result.app{background:transparent}
+.resultHero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 88% 14%,rgba(37,176,143,.18) 0 80px,transparent 82px),
+    radial-gradient(circle at 78% -15%,rgba(68,144,214,.10) 0 160px,transparent 162px),
+    linear-gradient(135deg,#0f5f59 0%,#0b4f4a 48%,#133e54 100%);
+  color:#fff;
+  border:0;
+  box-shadow:0 18px 42px rgba(10,68,63,.22);
+}
+.resultHero:before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,rgba(255,255,255,.08),transparent 45%);
+  pointer-events:none
+}
+.resultHero .eyebrow,
+.resultHero h1,.resultHero h2,.resultHero p{color:#fff!important}
+.resultHero .pill{background:rgba(255,255,255,.13)!important;color:#fff!important;border-color:rgba(255,255,255,.22)!important}
+.resultHero .pill.gold{background:#f5d9a2!important;color:#61430d!important;border-color:#f5d9a2!important}
+.resultHero .typeCard{
+  background:rgba(255,255,255,.94)!important;
+  border:1px solid rgba(255,255,255,.55)!important;
+  box-shadow:0 10px 24px rgba(5,48,45,.13)
+}
+.resultHero .typeCard h3{color:#0c4e49!important}
+.resultHero .typeCard p{color:#5e6f6b!important}
+.resultHero .typeCard .fit{color:#0e776e!important}
+
+.v23TopKpiGrid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:15px 0 2px
+}
+.v23Kpi{
+  min-height:108px;border-radius:20px;padding:15px;
+  border:1px solid #d8e7e2;background:#fff;box-shadow:0 10px 22px rgba(18,76,69,.06);
+  position:relative;overflow:hidden
+}
+.v23Kpi:after{content:"";position:absolute;width:90px;height:90px;right:-30px;top:-32px;border-radius:50%;opacity:.32}
+.v23Kpi.k1:after{background:#66d0ad}.v23Kpi.k2:after{background:#6faae0}.v23Kpi.k3:after{background:#efb176}.v23Kpi.k4:after{background:#a996e9}
+.v23KpiLabel{font-size:11px;font-weight:900;color:#6a7b77;letter-spacing:.04em}
+.v23KpiValue{display:block;font-size:28px;font-weight:950;color:#133e3a;margin-top:7px;letter-spacing:-.04em}
+.v23KpiDesc{display:block;font-size:11px;color:#72817d;margin-top:4px;line-height:1.4}
+
+.panel{
+  border:1px solid #dbe7e3!important;
+  box-shadow:0 14px 30px rgba(16,73,66,.055)!important;
+  border-radius:24px!important
+}
+.sectionTitle{
+  position:relative;
+  font-size:18px!important;
+  color:#123e3a!important;
+  margin:20px 0 12px!important;
+  padding-left:12px!important
+}
+.sectionTitle:before{
+  content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:999px;
+  background:linear-gradient(#1fa386,#0d756d)
+}
+
+.axis{
+  grid-template-columns:130px 1fr 44px!important;
+  gap:10px!important;
+  margin:9px 0!important
+}
+.axis label{font-weight:850!important;color:#324d49!important;font-size:12px!important}
+.track{height:12px!important;background:#e8efed!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.fill{
+  background:linear-gradient(90deg,#46b496,#0d756d)!important;
+  box-shadow:0 2px 8px rgba(18,126,111,.18)
+}
+.axis strong{font-size:12px!important;color:#153e3a!important}
+
+.detailGrid{gap:12px!important}
+.detail{
+  border-radius:18px!important;
+  border:1px solid #dfe8e5!important;
+  background:linear-gradient(145deg,#fff,#fbfdfc)!important;
+  box-shadow:0 8px 18px rgba(18,68,63,.035)
+}
+.detail h3{
+  color:#0e625a!important;
+  font-size:15px!important;
+  display:flex;align-items:center;gap:8px
+}
+.detail h3:before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#2aa386;box-shadow:0 0 0 5px #e5f6f1
+}
+
+.stressHero{
+  border-radius:18px!important;
+  background:linear-gradient(135deg,#fff7f3,#fff)!important;
+  border:1px solid #f0ded3!important;
+  box-shadow:0 8px 18px rgba(144,82,48,.04)
+}
+.stressBadge.high{background:#ffe3dd!important;color:#a74435!important}
+.stressBadge.mid{background:#fff0d8!important;color:#9a6818!important}
+.stressBadge.low{background:#ddf4ea!important;color:#17715f!important}
+
+.methodbox{
+  background:linear-gradient(135deg,#f8fbfa,#fff)!important;
+  border:1px solid #dde7e4!important;
+  border-radius:18px!important
+}
+.note{
+  background:#f4f7f6!important;border-radius:14px!important;color:#64716e!important
+}
+
+.v23Legend{
+  display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 2px
+}
+.v23Legend span{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;font-weight:850;color:#5c706b;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #dbe7e3
+}
+.v23Legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.v23Legend .i1{background:#0e786f}.v23Legend .i2{background:#9dbab3}.v23Legend .i3{background:#e79a4f}
+
+@media(max-width:760px){
+  .v23TopKpiGrid{grid-template-columns:1fr 1fr}
+  .axis{grid-template-columns:95px 1fr 36px!important}
+  .resultHero{border-radius:0 0 24px 24px!important}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V22</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V22 · VISUAL ACTION REPORT</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V23</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V23 · HIGH IMPACT VISUAL REPORT</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -579,7 +718,7 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V22는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V23은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
@@ -653,6 +792,15 @@ a{color:var(--teal)}
           <div id="dashGuide" class="vd-guide"></div>
         </section>
       </div>
+
+      
+      <div id="v23TopKpiGrid" class="v23TopKpiGrid">
+        <div class="v23Kpi k1"><span class="v23KpiLabel">가장 강한 업무축</span><b class="v23KpiValue" id="v23StrongAxis">-</b><span class="v23KpiDesc" id="v23StrongAxisDesc">핵심 강점</span></div>
+        <div class="v23Kpi k2"><span class="v23KpiLabel">현재 스트레스</span><b class="v23KpiValue" id="v23Stress">-</b><span class="v23KpiDesc" id="v23StressDesc">현재 부담 수준</span></div>
+        <div class="v23Kpi k3"><span class="v23KpiLabel">프로파일 선명도</span><b class="v23KpiValue" id="v23Clarity">-</b><span class="v23KpiDesc">유형의 뚜렷함</span></div>
+        <div class="v23Kpi k4"><span class="v23KpiLabel">보완 우선축</span><b class="v23KpiValue" id="v23LowAxis">-</b><span class="v23KpiDesc">의식적으로 빌려 쓸 축</span></div>
+      </div>
+      <div class="v23Legend"><span><i class="i1"></i>핵심 강점</span><span><i class="i2"></i>보완 축</span><span><i class="i3"></i>스트레스 조정</span></div>
 
       <div id="compareSummary" class="compareBox hidden"></div>
 
@@ -924,6 +1072,41 @@ function syncReportControls(){
     if(note)note.textContent='PC에서는 ‘결과지 저장하기’를 누르면 현재 결과 파일을 직접 저장할 수 있습니다. 남은 검사를 완료하면 최종 통합 결과가 만들어집니다.';
   }
   updateNextTestVisual();
+ updateV23Kpis();
+  updateV23Kpis();
+}
+
+
+function updateV23Kpis(){
+  const r=completed[mode];
+  if(!r)return;
+  const axes=r.axes||{};
+  const sorted=Object.entries(axes).sort((a,b)=>b[1]-a[1]);
+  const high=sorted[0]||['precision',0];
+  const low=sorted[sorted.length-1]||['relation',0];
+
+  const both=!!(completed.quick&&completed.pro);
+  if(both){
+    const ir=buildIntegratedResult();
+    const iAxes=ir.axes||{};
+    const iSorted=Object.entries(iAxes).sort((a,b)=>b[1]-a[1]);
+    const iHigh=iSorted[0]||high, iLow=iSorted[iSorted.length-1]||low;
+    $('v23StrongAxis').textContent=`${axisNames[iHigh[0]]} ${iHigh[1]}`;
+    $('v23StrongAxisDesc').textContent='두 검사 통합 핵심 강점';
+    $('v23Stress').textContent=`${ir.stressTotal}/100`;
+    $('v23StressDesc').textContent='Quick + Professional 통합';
+    const sim=compareResults(completed.quick,completed.pro).similarity;
+    $('v23Clarity').textContent=`${sim}/100`;
+    $('v23LowAxis').textContent=axisNames[iLow[0]];
+    return;
+  }
+
+  $('v23StrongAxis').textContent=`${axisNames[high[0]]} ${high[1]}`;
+  $('v23StrongAxisDesc').textContent='현재 검사에서 가장 강한 축';
+  $('v23Stress').textContent=`${r.stressTotal}/100`;
+  $('v23StressDesc').textContent=r.stressTotal>=65?'부담이 높은 편':r.stressTotal>=40?'관리 필요':'낮은 편';
+  $('v23Clarity').textContent=`${r.clarity||0}/100`;
+  $('v23LowAxis').textContent=axisNames[low[0]];
 }
 
 function updateNextTestVisual(){
