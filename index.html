@@ -725,7 +725,7 @@ a{color:var(--teal)}
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V25</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V25 · VISUAL EMAIL ATTACHMENT</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V26</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V26 · VISUAL RESULT LINK EMAIL</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -785,7 +785,7 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V25는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V26은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
@@ -895,8 +895,8 @@ a{color:var(--teal)}
 
         <div class="mobileEmailTools" id="mobileEmailTools">
           <input type="email" id="resultEmail" inputmode="email" autocomplete="email" placeholder="받을 개인 이메일 주소 입력">
-          <button type="button" class="actionBtn" id="emailResultBtn">시각형 결과를 개인메일로 보내기</button>
-          <div class="mobileEmailHint">시각형 결과 HTML 파일을 메일에 첨부합니다. 입력한 메일 주소는 자동 복사되므로 메일 앱의 받는 사람 칸에 붙여넣고 보내면 됩니다. 이메일 주소는 이 사이트에 저장하지 않습니다.</div>
+          <button type="button" class="actionBtn" id="emailResultBtn">시각형 결과 링크를 개인메일로 보내기</button>
+          <div class="mobileEmailHint">파일 다운로드 없이 메일 앱이 열리고, 메일 본문에 “시각형 결과 보기” 링크가 들어갑니다. PC에서 그 링크를 누르면 그래프·카드형 결과 화면이 그대로 열립니다. 이메일 주소와 검사 결과는 서버에 저장하지 않습니다.</div>
         </div>
 
         <button type="button" class="nextTestBtn hidden" id="reportNextTestBtn"></button>
@@ -1339,21 +1339,72 @@ body{font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Malgun Gothi
   return{...meta,doc};
 }
 
-async function copyEmailAddress(email){
-  try{
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      await navigator.clipboard.writeText(email);
-      return true;
-    }
-  }catch(_){}
-  return false;
-}
 
+function b64UrlEncodeUtf8(str){
+  const bytes=new TextEncoder().encode(str);
+  let bin='';
+  bytes.forEach(b=>bin+=String.fromCharCode(b));
+  return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function b64UrlDecodeUtf8(str){
+  let s=str.replace(/-/g,'+').replace(/_/g,'/');
+  while(s.length%4)s+='=';
+  const bin=atob(s);
+  const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+function compactResultForShare(r){
+  if(!r)return null;
+  const ak=Object.keys(axisNames),sk=Object.keys(stressNames);
+  return{
+    m:r.mode,
+    n:r.mainName,
+    c:r.code,
+    p:r.primary,
+    s:r.secondary,
+    a:ak.map(k=>r.axes[k]),
+    t:sk.map(k=>r.stress[k]),
+    tt:r.stressTotal,
+    tp:r.stressTop,
+    cl:r.clarityLabel,
+    cs:r.clarityScore
+  };
+}
+function expandSharedResult(x){
+  if(!x)return null;
+  const ak=Object.keys(axisNames),sk=Object.keys(stressNames);
+  const axes={},stress={};
+  ak.forEach((k,i)=>axes[k]=Number(x.a?.[i]??0));
+  sk.forEach((k,i)=>stress[k]=Number(x.t?.[i]??0));
+  return{
+    mode:x.m,
+    edition:x.m==='pro'?'Professional Profile':'Quick Check',
+    mainName:x.n,
+    code:x.c,
+    primary:x.p,
+    secondary:x.s,
+    axes,stress,
+    stressTotal:Number(x.tt??0),
+    stressTop:x.tp,
+    clarityLabel:x.cl,
+    clarityScore:Number(x.cs??0)
+  };
+}
+function buildSharedResultUrl(){
+  const payload={
+    v:26,
+    n:$('nickname').value.trim(),
+    m:mode,
+    q:compactResultForShare(completed.quick),
+    p:compactResultForShare(completed.pro)
+  };
+  const encoded=b64UrlEncodeUtf8(JSON.stringify(payload));
+  return `${location.origin}${location.pathname}#result=${encoded}`;
+}
 function validEmailAddress(v){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v||'').trim());
 }
-
-async function sendVisualResultByEmail(){
+function sendVisualResultByEmail(){
   const input=$('resultEmail');
   const status=$('saveStatus');
   const email=(input?.value||'').trim();
@@ -1369,61 +1420,149 @@ async function sendVisualResultByEmail(){
   }
 
   try{
-    const pack=buildVisualResultDocument();
-    const file=new File(
-      ["\ufeff",pack.doc],
-      pack.filename,
-      {type:'text/html;charset=utf-8'}
-    );
-
-    const copied=await copyEmailAddress(email);
-
-    if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
-      if(status){
-        status.textContent=copied
-          ? '메일 주소를 복사했습니다. 공유창에서 Gmail/이메일을 선택한 뒤 받는 사람 칸에 붙여넣고 보내세요.'
-          : '공유창에서 Gmail/이메일을 선택한 뒤 받는 사람 주소를 입력하고 보내세요.';
-        status.classList.add('show');
-      }
-
-      await navigator.share({
-        title:`[퍼스널 공직생활 프로파일] ${pack.edition} 결과`,
-        text:`받는 사람: ${email}\n시각형 결과 파일이 첨부되어 있습니다. PC에서 첨부파일을 열면 검사 결과를 시각형 화면 그대로 확인할 수 있습니다.`,
-        files:[file]
-      });
-
-      if(status){
-        status.textContent='시각형 결과 파일을 메일 앱으로 전달했습니다.';
-        setTimeout(()=>status.classList.remove('show'),2200);
-      }
-      return;
-    }
-
-    // 파일 공유가 안 되는 브라우저의 보조 경로: 실제 HTML 파일 내려받기
-    const blob=new Blob(["\ufeff",pack.doc],{type:'text/html;charset=utf-8'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;
-    a.download=pack.filename;
-    a.style.display='none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(()=>{try{a.remove();URL.revokeObjectURL(url);}catch(_){}},30000);
+    const meta=getResultExportMeta();
+    const resultUrl=buildSharedResultUrl();
+    const subject=`[퍼스널 공직생활 프로파일] ${meta.edition} 결과`;
+    const body=[
+      '퍼스널 공직생활 프로파일 검사 결과입니다.',
+      '',
+      '아래 링크를 누르면 PC나 휴대폰에서 그래프·카드가 포함된 시각형 결과 화면이 그대로 열립니다.',
+      '',
+      resultUrl,
+      '',
+      '※ 이 링크에는 검사 결과를 화면에 복원하기 위한 점수 정보가 주소 안에 포함되어 있습니다. 별도 서버에는 저장하지 않습니다.'
+    ].join('\n');
 
     if(status){
-      status.textContent='이 브라우저는 파일 첨부 공유를 지원하지 않아 시각형 결과 파일을 저장했습니다. 저장된 HTML 파일을 메일에 첨부해 주세요.';
+      status.textContent='메일 앱을 여는 중입니다. 메일 앱에서 마지막으로 보내기만 눌러주세요.';
       status.classList.add('show');
     }
-  }catch(err){
-    if(err&&err.name==='AbortError'){
+
+    window.location.href=`mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    setTimeout(()=>{
       if(status)status.classList.remove('show');
-      return;
-    }
+    },2600);
+  }catch(_){
     if(status){
-      status.textContent='시각형 결과 파일 전송을 완료하지 못했습니다. Chrome 또는 삼성인터넷에서 다시 시도해 주세요.';
+      status.textContent='메일 앱을 열지 못했습니다. 휴대폰의 기본 메일 앱 설정을 확인해 주세요.';
       status.classList.add('show');
       setTimeout(()=>status.classList.remove('show'),3000);
     }
+  }
+}
+
+function renderStoredSingleResult(r){
+  if(!r)return;
+  mode=r.mode||'quick';
+  const axes=r.axes,stress=r.stress;
+  const type=profileType(axes);
+  const {sorted,main,top3}=type;
+  const high=sorted[0],second=sorted[1],low=sorted[5];
+  const primary=axisMeta[main.primary||high[0]],secondary=axisMeta[main.secondary||second[0]],lowM=axisMeta[low[0]];
+  const sSorted=Object.entries(stress).sort((a,b)=>b[1]-a[1]);
+  const stressTotal=r.stressTotal;
+  let sBand='낮은 편',sClass='low',sMsg='현재 응답에서는 전반적인 부담 신호가 비교적 낮게 나타납니다.';
+  if(stressTotal>=65){sBand='높은 편';sClass='high';sMsg='여러 부담이 동시에 겹쳐 있을 가능성이 있습니다. 가장 높은 영역부터 업무조건과 회복시간을 점검해 보세요.'}
+  else if(stressTotal>=40){sBand='관리 필요';sClass='mid';sMsg='일부 부담이 누적될 수 있는 구간입니다. 가장 높은 스트레스 영역을 우선 조정하는 것이 좋습니다.'}
+
+  const nick=$('nickname').value.trim();
+  const edition=mode==='pro'?'Professional Profile':'Quick Check';
+  const clarityLabel=r.clarityLabel||'중간형';
+  const clarityScore=r.clarityScore||70;
+
+  $('intro').classList.add('hidden');
+  $('test').classList.add('hidden');
+  $('result').classList.remove('hidden');
+  $('reportSheet').classList.add('hidden');
+  $('reportBtn').classList.remove('hidden');
+  document.body.classList.remove('testing');
+
+  $('resultTitle').textContent=(nick?nick+'님의 ':'')+main.name;
+  $('resultSummaryText').textContent=`31가지 세분 공직 업무성향 중 현재 가장 가까운 유형입니다. ${main.tagline}.`;
+  $('typeMeta').innerHTML=`<span class="pill gold">${edition}</span><span class="pill">${main.code||r.code||'BAL'}</span><span class="pill">${clarityLabel}</span>`;
+  $('topTypes').innerHTML=top3.map((x,i)=>{
+    const fit=clamp(Math.round(x.raw),0,100);
+    return `<div class="typeCard ${i===0?'main':''}"><div class="rank">${i===0?'주유형':'인접유형 '+i}</div><h3>${x.p.name}</h3><p>${x.p.tagline}</p><p class="fit">유형 근접도 ${fit}</p></div>`;
+  }).join('');
+
+  $('bestAxisScore').textContent=axes[high[0]]+'/100';
+  $('bestAxisText').textContent=axisNames[high[0]];
+  $('stressScore').textContent=stressTotal+'/100';
+  $('stressText').textContent=`${sBand} · ${stressNames[sSorted[0][0]]}`;
+  $('clarityScore').textContent=clarityScore+'/100';
+  $('clarityText').textContent=`${clarityLabel}${mode==='quick'?' · 간편판 추정':''}`;
+  $('clarityMetricTitle').textContent='프로파일 선명도';
+  renderVisualDashboard({axes,stress,stressTotal,primaryKey:main.primary||high[0],secondaryKey:main.secondary||second[0]});
+
+  $('reportCode').textContent=`PERSONAL PUBLIC LIFE · ${edition.toUpperCase()} · ${main.code||r.code||'BAL'}`;
+  $('reportTitle').textContent=(nick?nick+'님의 ':'')+main.name+' 결과 검사지';
+  $('reportIntro').textContent=`주성향 ${main.name}, 인접유형 ${top3[1].p.name}·${top3[2].p.name}. 가장 강한 업무축은 ${axisNames[high[0]]}, 상대적으로 덜 쓰는 축은 ${axisNames[low[0]]}입니다.`;
+  $('axisBars').innerHTML=Object.entries(axisNames).map(([k,n])=>`<div class="axis"><label>${n}</label><div class="track"><div class="fill" style="width:${axes[k]}%"></div></div><strong>${axes[k]}</strong></div>`).join('');
+
+  const strengths=[...primary.strength,...secondary.strength].filter((v,i,a)=>a.indexOf(v)===i).slice(0,4);
+  $('strengthsGrid').innerHTML=`<div class="detail"><h3>핵심 강점</h3><ul>${strengths.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="detail"><h3>잘 맞는 업무 환경</h3><ul><li>${primary.env}</li><li>${secondary.env}</li><li>두 축을 함께 쓸 수 있을 때 몰입과 효율이 높아질 가능성이 있습니다.</li></ul></div>`;
+  $('growthGrid').innerHTML=`<div class="detail"><h3>강점의 그림자</h3><ul><li>${primary.shadow}</li><li>${secondary.shadow}</li><li>스트레스가 높을수록 익숙한 강점을 과하게 쓰는 패턴이 나타날 수 있습니다.</li></ul></div><div class="detail"><h3>보완 우선순위 · ${lowM.name}</h3><ul><li>${lowM.need}</li><li>낮은 점수는 결함이 아니라 자연스럽게 덜 쓰는 방식일 수 있습니다.</li><li>필요한 상황에서만 의식적으로 빌려 쓰는 것이 목표입니다.</li></ul></div>`;
+
+  $('stressHero').innerHTML=`<span class="stressBadge ${sClass}">현재 스트레스 ${sBand} · ${stressTotal}/100</span><p style="margin:10px 0 0;color:#596764">${sMsg}</p><p style="margin:8px 0 0"><b>가장 높은 부담:</b> ${stressNames[sSorted[0][0]]}</p>`;
+  $('stressAxes').innerHTML=Object.entries(stressNames).map(([k,n])=>`<div class="axis"><label>${n}</label><div class="track"><div class="fill" style="width:${stress[k]}%"></div></div><strong>${stress[k]}</strong></div>`).join('');
+
+  const pressure={precision:'확인을 반복하거나 작은 오류까지 과도하게 통제하려 할 수 있습니다.',drive:'속도를 더 높여 충분한 검토 없이 밀어붙이려 할 수 있습니다.',relation:'갈등을 피하려다 상대의 감정과 요구를 지나치게 떠안을 수 있습니다.',boundary:'업무를 강하게 차단하거나 관계보다 선 긋기에 집중할 수 있습니다.',flex:'대안을 너무 자주 바꾸며 기준점이 흐려질 수 있습니다.',report:'확신이 서지 않아 보고·확인을 반복하거나 결정권을 위로 넘길 수 있습니다.'};
+  $('pressurePattern').innerHTML=`<div class="pressureVisualGrid"><div class="pressureVisualCard warn"><div class="pvTop"><span class="pvIcon">!</span><b>압박 시 주의 패턴</b></div><p>${pressure[high[0]]}</p><span class="pvTag">주의할 패턴</span></div><div class="pressureVisualCard balance"><div class="pvTop"><span class="pvIcon">✓</span><b>균형을 되찾는 단서</b></div><p>${lowM.need}을 의식적으로 한 번 사용해 보세요.</p><span class="pvTag">균형의 힌트</span></div></div>`;
+
+  const stressTips={load:'오늘·이번 주·대기 업무를 나누어 눈에 보이게 만들고, 동시에 붙잡는 마감 수를 줄여보세요.',ambiguity:'담당·기대결과·기한과 내가 조정할 수 있는 범위를 먼저 확인하면 통제감이 높아집니다.',emotion:'상대의 감정과 업무 사실을 분리하고, 내가 해결할 수 있는 범위를 명확히 잡아보세요.',relationship:'상대의 의도를 추측하기보다 사실·요청·기한을 짧게 확인해 관계 부담을 낮춰보세요.',responsibility:'핵심 기준·검토 시점·공유 시점을 미리 정해 책임을 혼자 머릿속에 들고 있지 마세요.',recovery:'퇴근 후 최소 20~30분이라도 업무 알림과 생각에서 떨어지는 회복구간을 확보해 보세요.'};
+  $('workGuide').innerHTML=`<div class="operationCards"><div class="operationCard op1"><div class="opTop"><span class="opNum">01</span><span class="opSymbol">▤</span></div><h4>나에게 자연스러운 순서</h4><p>${primary.name}을 먼저 쓰고 ${secondary.name}으로 보완하는 흐름이 자연스럽습니다.</p><div class="opBottom">순서가 만드는 안정적인 성과</div></div><div class="operationCard op2"><div class="opTop"><span class="opNum">02</span><span class="opSymbol">◉</span></div><h4>현재 가장 필요한 스트레스 조정</h4><p>${stressTips[sSorted[0][0]]}</p><div class="opBottom">한 번에 하나씩, 더 가볍게</div></div><div class="operationCard op3"><div class="opTop"><span class="opNum">03</span><span class="opSymbol">▥</span></div><h4>프로파일 해석</h4><p>${clarityLabel}입니다. 한 유형 이름보다 6축 점수와 인접유형을 함께 보는 것이 좋습니다.</p><div class="opBottom">전체를 보는 시야가 핵심</div></div></div>`;
+
+  const scripts={precision:'“제가 확인한 기준은 여기까지입니다. 핵심 근거만 한 번 더 보고 진행하겠습니다.”',drive:'“지금 결정 가능한 범위부터 먼저 진행하고, 추가 정보가 생기면 조정하겠습니다.”',relation:'“서로 중요하게 보는 기준부터 맞춰보면 좋겠습니다.”',boundary:'“현재 업무와 겹쳐 우선순위를 확인한 뒤 가능한 범위를 말씀드리겠습니다.”',flex:'“방법은 조정할 수 있습니다. 다만 지켜야 할 핵심 결과부터 확인하겠습니다.”',report:'“결론부터 말씀드리면 A입니다. 현재 상황은 B이고, C에 대한 판단이 필요합니다.”'};
+  $('scripts').innerHTML=`<div class="quoteVisualGrid"><div class="quoteVisualCard q1"><div class="quoteMiniIcon">▣</div><div class="quoteMark">“</div><b>강점을 살리는 문장</b><p>${scripts[high[0]]}</p></div><div class="quoteVisualCard q2"><div class="quoteMiniIcon">◉</div><div class="quoteMark">“</div><b>보완용 문장</b><p>${scripts[low[0]]}</p></div></div>`;
+
+  const axisAction={precision:'핵심 기준과 사실을 먼저 한 번 확인합니다.',drive:'지금 결정 가능한 범위를 정하고 첫 행동을 시작합니다.',relation:'상대가 중요하게 보는 점을 먼저 확인합니다.',boundary:'우선순위·범위·기한을 분명히 합니다.',flex:'지켜야 할 목표는 유지하고 방법은 조정합니다.',report:'결론·현재상황·필요한 판단 순서로 짧게 공유합니다.'};
+  $('situationGuide').innerHTML=`<div class="situationVisualGrid"><div class="situationVisualCard"><div class="svTop"><span class="svIcon sv1">◎</span><b>지시가 애매할 때</b></div><ul><li>${axisAction[high[0]]}</li><li>보완 행동: ${axisAction[low[0]]}</li></ul></div><div class="situationVisualCard"><div class="svTop"><span class="svIcon sv2">●</span><b>의견이 다를 때</b></div><ul><li>사람과 문제를 분리하고 공통 목표를 먼저 확인합니다.</li><li>${axisNames[low[0]]}을 한 번 더 의식합니다.</li></ul></div><div class="situationVisualCard"><div class="svTop"><span class="svIcon sv3">◷</span><b>일이 몰릴 때</b></div><ul><li>마감·중요도·영향도를 기준으로 순서를 다시 정합니다.</li><li>${stressTips[sSorted[0][0]]}</li></ul></div><div class="situationVisualCard"><div class="svTop"><span class="svIcon sv4">✦</span><b>문제를 발견했을 때</b></div><ul><li>영향 범위와 필요한 공유 시점을 먼저 판단합니다.</li><li>수정할 수 있는 대안을 함께 준비합니다.</li></ul></div></div>`;
+
+  $('growthPlan').innerHTML=`<div class="growthTimeline"><div class="growthStep g1"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">1주차</span><div class="growthCopy"><b>관찰</b><span>${axisNames[high[0]]}을 과하게 쓰는 순간을 한 번 기록합니다.</span></div><span class="growthTag">나의 강점 발견</span></div></div><div class="growthStep g2"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">2주차</span><div class="growthCopy"><b>작은 보완</b><span>${lowM.need}을 실제 업무 한 건에 적용합니다.</span></div><span class="growthTag">새로운 습관 시도</span></div></div><div class="growthStep g3"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">3주차</span><div class="growthCopy"><b>스트레스 조정</b><span>${stressNames[sSorted[0][0]]} 부담을 낮출 수 있는 업무조건 하나를 바꿉니다.</span></div><span class="growthTag">더 가벼운 업무</span></div></div><div class="growthStep g4"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">4주차</span><div class="growthCopy"><b>통합</b><span>내 강점은 유지하되 보완축을 언제 빌릴지 개인 업무원칙 한 문장으로 정리합니다.</span></div><span class="growthTag">지속 가능한 나</span></div></div></div>`;
+
+  $('methodSummary').innerHTML=`<h3>${edition} 해석 원칙</h3><ul><li>유형명은 6개 연속 점수의 상위 두 축 조합을 기억하기 쉽게 표현한 것입니다.</li><li>이 결과는 자기이해와 연수·코칭을 위한 참고자료입니다.</li></ul>`;
+  $('methodTitle').textContent='10. 결과 해석의 근거와 한계';
+  $('compareSummary').classList.add('hidden');
+  $('compareDetailPanel').classList.add('hidden');
+  updateNextTestVisual();
+  updateV23Kpis();
+  syncReportControls();
+}
+
+function openSharedResultFromHash(){
+  const hash=location.hash||'';
+  if(!hash.startsWith('#result='))return false;
+  try{
+    const payload=JSON.parse(b64UrlDecodeUtf8(hash.slice(8)));
+    if(!payload||!payload.v)return false;
+
+    completed.quick=expandSharedResult(payload.q);
+    completed.pro=expandSharedResult(payload.p);
+    mode=payload.m || (completed.pro?'pro':'quick');
+    if($('nickname'))$('nickname').value=payload.n||'';
+
+    if(completed.quick&&completed.pro){
+      $('intro').classList.add('hidden');
+      $('test').classList.add('hidden');
+      $('result').classList.remove('hidden');
+      $('reportSheet').classList.add('hidden');
+      $('reportBtn').classList.remove('hidden');
+      document.body.classList.remove('testing');
+      renderDualComparison();
+      renderFinalIntegratedReport();
+      updateNextTestVisual();
+      updateV23Kpis();
+      syncReportControls();
+      window.scrollTo({top:0,behavior:'auto'});
+    }else{
+      renderStoredSingleResult(completed[mode]);
+      window.scrollTo({top:0,behavior:'auto'});
+    }
+    return true;
+  }catch(err){
+    console.warn('shared result decode failed',err);
+    return false;
   }
 }
 
@@ -2053,6 +2192,8 @@ function finish(){
  syncReportControls();
  window.scrollTo({top:0,behavior:document.body.classList.contains('testing')?'auto':'smooth'});
 }
+openSharedResultFromHash();
+
 })();
 </script>
 </body></html>
