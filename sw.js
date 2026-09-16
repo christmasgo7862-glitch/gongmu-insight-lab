@@ -1,4 +1,4 @@
-const PPL_DOWNLOAD_CACHE='ppl-download-v17';
+const PPL_DOWNLOAD_CACHE='ppl-download-v19';
 
 self.addEventListener('install',event=>{
   self.skipWaiting();
