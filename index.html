@@ -363,11 +363,163 @@ a{color:var(--teal)}
   .compareHeroScore b{font-size:34px}
 }
 
+
+/* V22 · visual action report (sections 5~9) */
+.v22SectionHead{
+  margin:24px 0 12px;
+  padding:12px 15px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border:1px solid #dce7e4;
+  box-shadow:0 8px 18px rgba(18,72,66,.04);
+}
+.v22SectionHead .v22HeadLeft{display:flex;align-items:center;gap:11px;min-width:0}
+.v22SectionHead .v22HeadIcon{
+  width:38px;height:38px;flex:0 0 38px;border-radius:50%;
+  display:grid;place-items:center;font-size:18px;font-weight:950;color:#fff;
+  box-shadow:0 7px 16px rgba(0,0,0,.10)
+}
+.v22SectionHead h3{margin:0;font-size:19px;letter-spacing:-.025em;color:#153c39}
+.v22SectionHead p{margin:0;font-size:11px;font-weight:800;white-space:nowrap}
+.v22SectionHead.orange{background:linear-gradient(135deg,#fffaf3,#fff)}
+.v22SectionHead.orange .v22HeadIcon{background:linear-gradient(135deg,#f0a62d,#d87318)}
+.v22SectionHead.orange p{color:#8c632d}
+.v22SectionHead.green{background:linear-gradient(135deg,#f2fbf8,#fff)}
+.v22SectionHead.green .v22HeadIcon{background:linear-gradient(135deg,#2ca482,#0d746b)}
+.v22SectionHead.green p{color:#3f7169}
+.v22SectionHead.purple{background:linear-gradient(135deg,#f7f4ff,#fff)}
+.v22SectionHead.purple .v22HeadIcon{background:linear-gradient(135deg,#7b69e5,#5947c9)}
+.v22SectionHead.purple p{color:#6658a6}
+.v22SectionHead.gold{background:linear-gradient(135deg,#fff8ed,#fff)}
+.v22SectionHead.gold .v22HeadIcon{background:linear-gradient(135deg,#eda524,#c87b0d)}
+.v22SectionHead.gold p{color:#8b6124}
+
+.pressureVisualGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pressureVisualCard{
+  position:relative;overflow:hidden;border-radius:20px;padding:16px 17px;border:1px solid #e3e9e7;
+  background:#fff;box-shadow:0 9px 20px rgba(17,66,61,.04)
+}
+.pressureVisualCard:after{
+  content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-38px;top:-38px;opacity:.5
+}
+.pressureVisualCard.warn{background:linear-gradient(135deg,#fff9f0,#fff)}
+.pressureVisualCard.warn:after{background:#ffe2bd}
+.pressureVisualCard.balance{background:linear-gradient(135deg,#edf9f6,#fff)}
+.pressureVisualCard.balance:after{background:#ccefe7}
+.pvTop{display:flex;align-items:center;gap:9px;margin-bottom:7px;position:relative;z-index:1}
+.pvIcon{
+  width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-size:17px;font-weight:950
+}
+.warn .pvIcon{background:#fff0d9;color:#bf6f13}
+.balance .pvIcon{background:#dff4ee;color:#0b776d}
+.pvTop b{font-size:14px;color:#173e3b}
+.pressureVisualCard p{margin:0;color:#586762;font-size:13px;line-height:1.62;position:relative;z-index:1}
+.pvTag{
+  display:inline-flex;margin-top:10px;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;position:relative;z-index:1
+}
+.warn .pvTag{background:#fff0db;color:#a85f10}
+.balance .pvTag{background:#dff4ee;color:#0e7068}
+
+.operationCards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.operationCard{
+  border-radius:20px;padding:16px;border:1px solid #dce7e4;background:#fff;
+  box-shadow:0 9px 20px rgba(18,65,60,.04);position:relative;overflow:hidden
+}
+.operationCard:after{content:"";position:absolute;width:96px;height:96px;border-radius:50%;right:-38px;top:-34px;opacity:.28}
+.operationCard.op1{background:linear-gradient(145deg,#eefaf6,#fff)}
+.operationCard.op1:after{background:#9fddc9}
+.operationCard.op2{background:linear-gradient(145deg,#eef6ff,#fff)}
+.operationCard.op2:after{background:#9ec8f7}
+.operationCard.op3{background:linear-gradient(145deg,#fff3eb,#fff)}
+.operationCard.op3:after{background:#ffc39e}
+.opTop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;position:relative;z-index:1}
+.opNum{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:950
+}
+.op1 .opNum{background:#2e9a78}.op2 .opNum{background:#2f82c8}.op3 .opNum{background:#e87944}
+.opSymbol{font-size:23px;opacity:.75}
+.operationCard h4{margin:0 0 7px;font-size:15px;color:#173e3b;position:relative;z-index:1}
+.operationCard p{margin:0;color:#586762;font-size:12.5px;line-height:1.62;position:relative;z-index:1}
+.opBottom{
+  margin-top:12px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.72);
+  border:1px solid rgba(210,225,220,.9);font-size:10.5px;font-weight:900;position:relative;z-index:1
+}
+.op1 .opBottom{color:#16705f}.op2 .opBottom{color:#2d669b}.op3 .opBottom{color:#a65431}
+
+.quoteVisualGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quoteVisualCard{
+  border-radius:20px;padding:17px;border:1px solid #dfe6e4;background:#fff;position:relative;overflow:hidden;
+  box-shadow:0 8px 18px rgba(15,63,59,.04)
+}
+.quoteVisualCard.q1{background:linear-gradient(135deg,#eefaf7,#fff)}
+.quoteVisualCard.q2{background:linear-gradient(135deg,#f6f2ff,#fff)}
+.quoteMark{font-size:38px;line-height:.8;font-weight:950;opacity:.65;margin-bottom:7px}
+.q1 .quoteMark{color:#35a58c}.q2 .quoteMark{color:#795de2}
+.quoteVisualCard b{display:block;font-size:13px;color:#173e3b;margin-bottom:7px}
+.quoteVisualCard p{margin:0;font-size:13px;line-height:1.7;color:#475a56}
+.quoteMiniIcon{
+  position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:17px
+}
+.q1 .quoteMiniIcon{background:#dff3ed;color:#0b766e}.q2 .quoteMiniIcon{background:#ece5ff;color:#6047c7}
+
+.situationVisualGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.situationVisualCard{
+  border:1px solid #dfe7e4;border-radius:18px;padding:15px;background:#fff;
+  box-shadow:0 8px 18px rgba(15,63,59,.035)
+}
+.svTop{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.svIcon{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:15px;font-weight:950
+}
+.sv1{background:#2d9e7a}.sv2{background:#3d8bd6}.sv3{background:#dc7c40}.sv4{background:#e5a426}
+.svTop b{font-size:14px;color:#183f3c}
+.situationVisualCard ul{margin:0;padding-left:18px}
+.situationVisualCard li{margin:5px 0;color:#566560;font-size:12.5px;line-height:1.55}
+
+.growthTimeline{
+  position:relative;margin:4px 0 0;padding-left:48px
+}
+.growthTimeline:before{
+  content:"";position:absolute;left:18px;top:12px;bottom:18px;width:3px;border-radius:999px;
+  background:linear-gradient(#32a77d,#4a9ee3,#ee8a42,#8265e6)
+}
+.growthStep{position:relative;margin-bottom:10px}
+.growthStep:last-child{margin-bottom:0}
+.growthDot{
+  position:absolute;left:-43px;top:11px;width:24px;height:24px;border-radius:50%;border:4px solid #fff;
+  box-shadow:0 0 0 2px currentColor;background:currentColor
+}
+.growthStep.g1{color:#2b9b76}.growthStep.g2{color:#3c91dd}.growthStep.g3{color:#ea8441}.growthStep.g4{color:#785dde}
+.growthBox{
+  display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;
+  border:1px solid #dfe7e4;border-radius:16px;padding:11px 12px;background:#fff;box-shadow:0 7px 15px rgba(17,66,61,.03)
+}
+.weekPill{
+  min-width:54px;text-align:center;padding:6px 8px;border-radius:999px;color:#fff;font-size:10px;font-weight:950
+}
+.g1 .weekPill{background:#2b9b76}.g2 .weekPill{background:#3c91dd}.g3 .weekPill{background:#ea8441}.g4 .weekPill{background:#785dde}
+.growthCopy b{display:block;font-size:13px;color:#173e3b}
+.growthCopy span{display:block;font-size:11.5px;color:#61706c;margin-top:3px;line-height:1.5}
+.growthTag{
+  padding:6px 9px;border-radius:999px;font-size:10px;font-weight:900;white-space:nowrap;background:#f2f6f5;color:#4b625d
+}
+
+@media(max-width:760px){
+  .v22SectionHead{align-items:flex-start}
+  .v22SectionHead p{white-space:normal;text-align:right;max-width:130px}
+  .pressureVisualGrid,.operationCards,.quoteVisualGrid,.situationVisualGrid{grid-template-columns:1fr}
+  .growthBox{grid-template-columns:auto 1fr}
+  .growthTag{grid-column:2}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V21</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V21 · VISUAL COMPARE EMPHASIS</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V22</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V22 · VISUAL ACTION REPORT</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -427,7 +579,7 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V21은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V22는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
@@ -548,13 +700,13 @@ a{color:var(--teal)}
       </div>
       <div class="panel">
         <div class="sectionTitle">4. 스트레스·회복 프로파일</div><div class="stressHero" id="stressHero"></div><div id="stressAxes"></div>
-        <div class="sectionTitle">5. 압박이 커질 때의 나</div><div id="pressurePattern"></div>
+        <div class="v22SectionHead orange"><div class="v22HeadLeft"><span class="v22HeadIcon">⚡</span><h3>5. 압박이 커질 때의 나</h3></div><p>스트레스 상황에서도, 나답게</p></div><div id="pressurePattern"></div>
       </div>
       <div class="panel">
-        <div class="sectionTitle">6. 나에게 맞는 업무 운영법</div><div id="workGuide"></div>
-        <div class="sectionTitle">7. 실제로 써볼 문장</div><div id="scripts"></div>
-        <div class="sectionTitle">8. 상황별 활용 가이드</div><div id="situationGuide"></div>
-        <div class="sectionTitle">9. 30일 성장 포인트</div><div id="growthPlan"></div>
+        <div class="v22SectionHead green"><div class="v22HeadLeft"><span class="v22HeadIcon">⚙</span><h3>6. 나에게 맞는 업무 운영법</h3></div><p>나답게, 더 효율적으로</p></div><div id="workGuide"></div>
+        <div class="v22SectionHead purple"><div class="v22HeadLeft"><span class="v22HeadIcon">“</span><h3>7. 실제로 써볼 문장</h3></div><p>작은 한마디가 큰 변화를 만듭니다</p></div><div id="scripts"></div>
+        <div class="v22SectionHead gold"><div class="v22HeadLeft"><span class="v22HeadIcon">◎</span><h3>8. 상황별 활용 가이드</h3></div><p>어떤 상황에서도, 나답게 적용해보세요</p></div><div id="situationGuide"></div>
+        <div class="v22SectionHead green"><div class="v22HeadLeft"><span class="v22HeadIcon">↑</span><h3>9. 30일 성장 포인트</h3></div><p>지금의 작은 실천이, 더 나은 30일을 만듭니다</p></div><div id="growthPlan"></div>
       </div>
       <div class="panel hidden" id="compareDetailPanel">
         <div class="sectionTitle">10. Quick ↔ Professional 비교 · 통합 분석</div>
@@ -1183,18 +1335,43 @@ function renderFinalIntegratedReport(){
  $('stressAxes').innerHTML=Object.entries(stressNames).map(([k,n])=>`<div class="axis"><label>${n}</label><div class="track"><div class="fill" style="width:${stress[k]}%"></div></div><strong>${stress[k]}</strong></div>`).join('');
 
  const pressure={precision:'확인을 반복하거나 작은 오류까지 과도하게 통제하려 할 수 있습니다.',drive:'속도를 더 높여 충분한 검토 없이 밀어붙이려 할 수 있습니다.',relation:'갈등을 피하려다 상대의 감정과 요구를 지나치게 떠안을 수 있습니다.',boundary:'업무를 강하게 차단하거나 관계보다 선 긋기에 집중할 수 있습니다.',flex:'대안을 너무 자주 바꾸며 기준점이 흐려질 수 있습니다.',report:'확신이 서지 않아 보고·확인을 반복하거나 결정권을 위로 넘길 수 있습니다.'};
- $('pressurePattern').innerHTML=`<div class="callout gold"><b>통합 프로파일의 압박 시 패턴</b><br>${pressure[high[0]]}</div><div class="callout"><b>균형을 되찾는 단서</b><br>${lowM.need}</div>`;
+ $('pressurePattern').innerHTML=`
+ <div class="pressureVisualGrid">
+   <div class="pressureVisualCard warn"><div class="pvTop"><span class="pvIcon">!</span><b>통합 프로파일의 압박 시 패턴</b></div><p>${pressure[high[0]]}</p><span class="pvTag">주의할 패턴</span></div>
+   <div class="pressureVisualCard balance"><div class="pvTop"><span class="pvIcon">✓</span><b>균형을 되찾는 단서</b></div><p>${lowM.need}</p><span class="pvTag">균형의 힌트</span></div>
+ </div>`;
 
  const stressTips={load:'오늘·이번 주·대기 업무를 나누어 눈에 보이게 만들고, 동시에 붙잡는 마감 수를 줄여보세요.',ambiguity:'담당·기대결과·기한과 내가 조정할 수 있는 범위를 먼저 확인하면 통제감이 높아집니다.',emotion:'상대의 감정과 업무 사실을 분리하고, 내가 해결할 수 있는 범위를 명확히 잡아보세요.',relationship:'상대의 의도를 추측하기보다 사실·요청·기한을 짧게 확인해 관계 부담을 낮춰보세요.',responsibility:'핵심 기준·검토 시점·공유 시점을 미리 정해 책임을 혼자 머릿속에 들고 있지 마세요.',recovery:'퇴근 후 최소 20~30분이라도 업무 알림과 생각에서 떨어지는 회복구간을 확보해 보세요.'};
- $('workGuide').innerHTML=`<div class="callout"><b>최종 업무 운영 순서</b><br>${primary.name}을 먼저 쓰고 ${secondary.name}으로 보완하는 흐름이 자연스럽습니다.</div><div class="callout"><b>가장 필요한 스트레스 조정</b><br>${stressTips[stressSorted[0][0]]}</div><div class="callout"><b>두 검사 결산</b><br>${c.detail}</div>`;
+ $('workGuide').innerHTML=`
+ <div class="operationCards">
+   <div class="operationCard op1"><div class="opTop"><span class="opNum">01</span><span class="opSymbol">▤</span></div><h4>최종 업무 운영 순서</h4><p>${primary.name}을 먼저 쓰고 ${secondary.name}으로 보완하는 흐름이 자연스럽습니다.</p><div class="opBottom">순서가 만드는 안정적인 성과</div></div>
+   <div class="operationCard op2"><div class="opTop"><span class="opNum">02</span><span class="opSymbol">◉</span></div><h4>가장 필요한 스트레스 조정</h4><p>${stressTips[stressSorted[0][0]]}</p><div class="opBottom">한 번에 하나씩, 더 가볍게</div></div>
+   <div class="operationCard op3"><div class="opTop"><span class="opNum">03</span><span class="opSymbol">▥</span></div><h4>두 검사 결산</h4><p>${c.detail}</p><div class="opBottom">전체를 보는 시야가 핵심</div></div>
+ </div>`;
 
  const scripts={precision:'“제가 확인한 기준은 여기까지입니다. 핵심 근거만 한 번 더 보고 진행하겠습니다.”',drive:'“지금 결정 가능한 범위부터 먼저 진행하고, 추가 정보가 생기면 조정하겠습니다.”',relation:'“서로 중요하게 보는 기준부터 맞춰보면 좋겠습니다.”',boundary:'“현재 업무와 겹쳐 우선순위를 확인한 뒤 가능한 범위를 말씀드리겠습니다.”',flex:'“방법은 조정할 수 있습니다. 다만 지켜야 할 핵심 결과부터 확인하겠습니다.”',report:'“결론부터 말씀드리면 A입니다. 현재 상황은 B이고, C에 대한 판단이 필요합니다.”'};
- $('scripts').innerHTML=`<div class="callout"><b>통합 강점을 살리는 문장</b><br>${scripts[high[0]]}</div><div class="callout"><b>통합 보완용 문장</b><br>${scripts[low[0]]}</div>`;
+ $('scripts').innerHTML=`
+ <div class="quoteVisualGrid">
+   <div class="quoteVisualCard q1"><div class="quoteMiniIcon">▣</div><div class="quoteMark">“</div><b>통합 강점을 살리는 문장</b><p>${scripts[high[0]]}</p></div>
+   <div class="quoteVisualCard q2"><div class="quoteMiniIcon">◉</div><div class="quoteMark">“</div><b>통합 보완용 문장</b><p>${scripts[low[0]]}</p></div>
+ </div>`;
 
  const axisAction={precision:'핵심 기준과 사실을 먼저 한 번 확인합니다.',drive:'지금 결정 가능한 범위를 정하고 첫 행동을 시작합니다.',relation:'상대가 중요하게 보는 점을 먼저 확인합니다.',boundary:'우선순위·범위·기한을 분명히 합니다.',flex:'지켜야 할 목표는 유지하고 방법은 조정합니다.',report:'결론·현재상황·필요한 판단 순서로 짧게 공유합니다.'};
- $('situationGuide').innerHTML=`<div class="detailGrid"><div class="detail"><h3>지시가 애매할 때</h3><ul><li>${axisAction[high[0]]}</li><li>보완 행동: ${axisAction[low[0]]}</li></ul></div><div class="detail"><h3>의견이 다를 때</h3><ul><li>사람과 문제를 분리하고 공통 목표를 먼저 확인합니다.</li><li>${axisNames[high[0]]}만 과하게 쓰지 않도록 ${axisNames[low[0]]}을 한 번 더 의식합니다.</li></ul></div><div class="detail"><h3>일이 몰릴 때</h3><ul><li>마감·중요도·영향도를 기준으로 순서를 다시 정합니다.</li><li>${stressTips[stressSorted[0][0]]}</li></ul></div><div class="detail"><h3>문제를 발견했을 때</h3><ul><li>영향 범위와 필요한 공유 시점을 먼저 판단합니다.</li><li>수정 가능한 대안을 함께 준비합니다.</li></ul></div></div>`;
+ $('situationGuide').innerHTML=`
+ <div class="situationVisualGrid">
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv1">◎</span><b>지시가 애매할 때</b></div><ul><li>${axisAction[high[0]]}</li><li>보완 행동: ${axisAction[low[0]]}</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv2">●</span><b>의견이 다를 때</b></div><ul><li>사람과 문제를 분리하고 공통 목표를 먼저 확인합니다.</li><li>${axisNames[high[0]]}만 과하게 쓰지 않도록 ${axisNames[low[0]]}을 한 번 더 의식합니다.</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv3">◷</span><b>일이 몰릴 때</b></div><ul><li>마감·중요도·영향도를 기준으로 순서를 다시 정합니다.</li><li>${stressTips[stressSorted[0][0]]}</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv4">✦</span><b>문제를 발견했을 때</b></div><ul><li>영향 범위와 필요한 공유 시점을 먼저 판단합니다.</li><li>수정 가능한 대안을 함께 준비합니다.</li></ul></div>
+ </div>`;
 
- $('growthPlan').innerHTML=`<div class="callout"><b>1주차 · 공통 강점 관찰</b><br>${axisNames[high[0]]}이 실제 업무에서 언제 가장 잘 발휘되는지 기록합니다.</div><div class="callout"><b>2주차 · 보완축 실험</b><br>${lowM.need}</div><div class="callout"><b>3주차 · 스트레스 조정</b><br>${stressNames[stressSorted[0][0]]} 부담을 낮출 수 있는 업무조건 하나를 바꿉니다.</div><div class="callout"><b>4주차 · 개인 업무원칙</b><br>두 검사에서 반복된 강점과 달라진 축을 바탕으로 나만의 업무원칙 한 문장을 정합니다.</div>`;
+ $('growthPlan').innerHTML=`
+ <div class="growthTimeline">
+   <div class="growthStep g1"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">1주차</span><div class="growthCopy"><b>공통 강점 관찰</b><span>${axisNames[high[0]]}이 실제 업무에서 언제 가장 잘 발휘되는지 기록합니다.</span></div><span class="growthTag">나의 강점 발견</span></div></div>
+   <div class="growthStep g2"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">2주차</span><div class="growthCopy"><b>보완축 실험</b><span>${lowM.need}</span></div><span class="growthTag">새로운 습관 시도</span></div></div>
+   <div class="growthStep g3"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">3주차</span><div class="growthCopy"><b>스트레스 조정</b><span>${stressNames[stressSorted[0][0]]} 부담을 낮출 수 있는 업무조건 하나를 바꿉니다.</span></div><span class="growthTag">더 가벼운 업무</span></div></div>
+   <div class="growthStep g4"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">4주차</span><div class="growthCopy"><b>개인 업무원칙</b><span>두 검사에서 반복된 강점과 달라진 축을 바탕으로 나만의 업무원칙 한 문장을 정합니다.</span></div><span class="growthTag">지속 가능한 나</span></div></div>
+ </div>`;
 
  $('methodSummary').innerHTML=`<h3>Quick + Professional 최종 통합 해석</h3><ul><li>최종 통합 유형은 두 검사의 6개 업무축 점수를 동일 비중으로 평균해 설명한 내부 종합지표입니다.</li><li>두 검사에서 반복되는 축은 비교적 안정적으로 나타난 경향, 달라지는 축은 상황과 문항 깊이에 따라 달라질 수 있는 경향으로 해석합니다.</li><li>이 통합값과 31유형은 표준화 규준이나 통계적 재검사 신뢰도 계수가 아닙니다.</li><li>결과는 자기이해와 연수·코칭용이며 인사평가·선발·배치 판단에는 사용하지 않습니다.</li></ul><p><b>근거 프레임:</b> KOSHA GUIDE E-G-2-2025, Pletzer & Abrahams (2025), Kepes et al. (2024/2025), WHO (2022), ISO 45003:2021, Khalid & Syed (2024), AERA/APA/NCME Testing Standards의 원칙을 설계 참고자료로 사용했습니다.</p>`;
 
@@ -1415,13 +1592,38 @@ function finish(){
  $('growthGrid').innerHTML=`<div class="detail"><h3>강점의 그림자</h3><ul><li>${primary.shadow}</li><li>${secondary.shadow}</li><li>스트레스가 높을수록 익숙한 강점을 과하게 쓰는 패턴이 나타날 수 있습니다.</li></ul></div><div class="detail"><h3>보완 우선순위 · ${lowM.name}</h3><ul><li>${lowM.need}</li><li>낮은 점수는 결함이 아니라 자연스럽게 덜 쓰는 방식일 수 있습니다.</li><li>필요한 상황에서만 의식적으로 빌려 쓰는 것이 목표입니다.</li></ul></div>`;
  $('stressHero').innerHTML=`<span class="stressBadge ${sClass}">현재 스트레스 ${sBand} · ${stressTotal}/100</span><p style="margin:10px 0 0;color:#596764">${sMsg}</p><p style="margin:8px 0 0"><b>가장 높은 부담:</b> ${stressNames[sSorted[0][0]]}</p>`;$('stressAxes').innerHTML=Object.entries(stressNames).map(([k,n])=>`<div class="axis"><label>${n}</label><div class="track"><div class="fill" style="width:${stress[k]}%"></div></div><strong>${stress[k]}</strong></div>`).join('');
  const pressure={precision:'확인을 반복하거나 작은 오류까지 과도하게 통제하려 할 수 있습니다.',drive:'속도를 더 높여 충분한 검토 없이 밀어붙이려 할 수 있습니다.',relation:'갈등을 피하려다 상대의 감정과 요구를 지나치게 떠안을 수 있습니다.',boundary:'업무를 강하게 차단하거나 관계보다 선 긋기에 집중할 수 있습니다.',flex:'대안을 너무 자주 바꾸며 기준점이 흐려질 수 있습니다.',report:'확신이 서지 않아 보고·확인을 반복하거나 결정권을 위로 넘길 수 있습니다.'};
- $('pressurePattern').innerHTML=`<div class="callout gold"><b>압박 시 주의 패턴</b><br>${pressure[high[0]]}</div><div class="callout"><b>균형을 되찾는 단서</b><br>${lowM.need}을 의식적으로 한 번 사용해 보세요.</div>`;
+ $('pressurePattern').innerHTML=`
+ <div class="pressureVisualGrid">
+   <div class="pressureVisualCard warn"><div class="pvTop"><span class="pvIcon">!</span><b>압박 시 주의 패턴</b></div><p>${pressure[high[0]]}</p><span class="pvTag">주의할 패턴</span></div>
+   <div class="pressureVisualCard balance"><div class="pvTop"><span class="pvIcon">✓</span><b>균형을 되찾는 단서</b></div><p>${lowM.need}을 의식적으로 한 번 사용해 보세요.</p><span class="pvTag">균형의 힌트</span></div>
+ </div>`;
  const stressTips={load:'오늘·이번 주·대기 업무를 나누어 눈에 보이게 만들고, 동시에 붙잡는 마감 수를 줄여보세요.',ambiguity:'담당·기대결과·기한과 내가 조정할 수 있는 범위를 먼저 확인하면 통제감이 높아집니다.',emotion:'상대의 감정과 업무 사실을 분리하고, 내가 해결할 수 있는 범위를 명확히 잡아보세요.',relationship:'상대의 의도를 추측하기보다 사실·요청·기한을 짧게 확인해 관계 부담을 낮춰보세요.',responsibility:'핵심 기준·검토 시점·공유 시점을 미리 정해 책임을 혼자 머릿속에 들고 있지 마세요.',recovery:'퇴근 후 최소 20~30분이라도 업무 알림과 생각에서 떨어지는 회복구간을 확보해 보세요.'};
- $('workGuide').innerHTML=`<div class="callout"><b>나에게 자연스러운 순서</b><br>${primary.name}을 먼저 쓰고 ${secondary.name}으로 보완하는 흐름이 자연스럽습니다.</div><div class="callout"><b>현재 가장 필요한 스트레스 조정</b><br>${stressTips[sSorted[0][0]]}</div><div class="callout"><b>프로파일 해석</b><br>${clarityLabel}입니다. ${clarityLabel==='복합형'?'한 유형 이름보다 6축 점수와 인접유형을 함께 보는 편이 더 정확합니다.':'주유형의 특징이 비교적 분명하지만 상황에 따라 인접유형도 함께 나타날 수 있습니다.'}</div>`;
- const scripts={precision:'“제가 확인한 기준은 여기까지입니다. 핵심 근거만 한 번 더 보고 진행하겠습니다.”',drive:'“지금 결정 가능한 범위부터 먼저 진행하고, 추가 정보가 생기면 조정하겠습니다.”',relation:'“서로 중요하게 보는 기준부터 맞춰보면 좋겠습니다.”',boundary:'“현재 업무와 겹쳐 우선순위를 확인한 뒤 가능한 범위를 말씀드리겠습니다.”',flex:'“방법은 조정할 수 있습니다. 다만 지켜야 할 핵심 결과부터 확인하겠습니다.”',report:'“결론부터 말씀드리면 A입니다. 현재 상황은 B이고, C에 대한 판단이 필요합니다.”'};$('scripts').innerHTML=`<div class="callout"><b>강점을 살리는 문장</b><br>${scripts[high[0]]}</div><div class="callout"><b>보완용 문장</b><br>${scripts[low[0]]}</div>`;
+ $('workGuide').innerHTML=`
+ <div class="operationCards">
+   <div class="operationCard op1"><div class="opTop"><span class="opNum">01</span><span class="opSymbol">▤</span></div><h4>나에게 자연스러운 순서</h4><p>${primary.name}을 먼저 쓰고 ${secondary.name}으로 보완하는 흐름이 자연스럽습니다.</p><div class="opBottom">순서가 만드는 안정적인 성과</div></div>
+   <div class="operationCard op2"><div class="opTop"><span class="opNum">02</span><span class="opSymbol">◉</span></div><h4>현재 가장 필요한 스트레스 조정</h4><p>${stressTips[sSorted[0][0]]}</p><div class="opBottom">한 번에 하나씩, 더 가볍게</div></div>
+   <div class="operationCard op3"><div class="opTop"><span class="opNum">03</span><span class="opSymbol">▥</span></div><h4>프로파일 해석</h4><p>${clarityLabel}입니다. ${clarityLabel==='복합형'?'한 유형 이름보다 6축 점수와 인접유형을 함께 보는 편이 더 정확합니다.':'주유형의 특징이 비교적 분명하지만 상황에 따라 인접유형도 함께 나타날 수 있습니다.'}</p><div class="opBottom">전체를 보는 시야가 핵심</div></div>
+ </div>`;
+ const scripts={precision:'“제가 확인한 기준은 여기까지입니다. 핵심 근거만 한 번 더 보고 진행하겠습니다.”',drive:'“지금 결정 가능한 범위부터 먼저 진행하고, 추가 정보가 생기면 조정하겠습니다.”',relation:'“서로 중요하게 보는 기준부터 맞춰보면 좋겠습니다.”',boundary:'“현재 업무와 겹쳐 우선순위를 확인한 뒤 가능한 범위를 말씀드리겠습니다.”',flex:'“방법은 조정할 수 있습니다. 다만 지켜야 할 핵심 결과부터 확인하겠습니다.”',report:'“결론부터 말씀드리면 A입니다. 현재 상황은 B이고, C에 대한 판단이 필요합니다.”'};$('scripts').innerHTML=`
+ <div class="quoteVisualGrid">
+   <div class="quoteVisualCard q1"><div class="quoteMiniIcon">▣</div><div class="quoteMark">“</div><b>강점을 살리는 문장</b><p>${scripts[high[0]]}</p></div>
+   <div class="quoteVisualCard q2"><div class="quoteMiniIcon">◉</div><div class="quoteMark">“</div><b>보완용 문장</b><p>${scripts[low[0]]}</p></div>
+ </div>`;
  const axisAction={precision:'핵심 기준과 사실을 먼저 한 번 확인합니다.',drive:'지금 결정 가능한 범위를 정하고 첫 행동을 시작합니다.',relation:'상대가 중요하게 보는 점을 먼저 확인합니다.',boundary:'우선순위·범위·기한을 분명히 합니다.',flex:'지켜야 할 목표는 유지하고 방법은 조정합니다.',report:'결론·현재상황·필요한 판단 순서로 짧게 공유합니다.'};
- $('situationGuide').innerHTML=`<div class="detailGrid"><div class="detail"><h3>지시가 애매할 때</h3><ul><li>${axisAction[high[0]]}</li><li>보완 행동: ${axisAction[low[0]]}</li></ul></div><div class="detail"><h3>의견이 다를 때</h3><ul><li>사람과 문제를 분리하고 공통 목표를 먼저 확인합니다.</li><li>내 강점인 ${axisNames[high[0]]}만 과하게 쓰지 않도록 ${axisNames[low[0]]}을 한 번 더 의식합니다.</li></ul></div><div class="detail"><h3>일이 몰릴 때</h3><ul><li>마감·중요도·영향도를 기준으로 순서를 다시 정합니다.</li><li>${stressTips[sSorted[0][0]]}</li></ul></div><div class="detail"><h3>문제를 발견했을 때</h3><ul><li>영향 범위와 필요한 공유 시점을 먼저 판단합니다.</li><li>수정할 수 있는 대안을 함께 준비하면 불필요한 불안을 줄일 수 있습니다.</li></ul></div></div>`;
- $('growthPlan').innerHTML=`<div class="callout"><b>1주차 · 관찰</b><br>${axisNames[high[0]]}을 과하게 쓰는 순간을 한 번 기록합니다.</div><div class="callout"><b>2주차 · 작은 보완</b><br>${lowM.need}을 실제 업무 한 건에 적용합니다.</div><div class="callout"><b>3주차 · 스트레스 조정</b><br>${stressNames[sSorted[0][0]]} 부담을 낮출 수 있는 업무조건 하나를 바꿉니다.</div><div class="callout"><b>4주차 · 통합</b><br>내 강점은 유지하되 반대축을 언제 빌릴지 개인 업무원칙 한 문장으로 정리합니다.</div>`;
+ $('situationGuide').innerHTML=`
+ <div class="situationVisualGrid">
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv1">◎</span><b>지시가 애매할 때</b></div><ul><li>${axisAction[high[0]]}</li><li>보완 행동: ${axisAction[low[0]]}</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv2">●</span><b>의견이 다를 때</b></div><ul><li>사람과 문제를 분리하고 공통 목표를 먼저 확인합니다.</li><li>내 강점인 ${axisNames[high[0]]}만 과하게 쓰지 않도록 ${axisNames[low[0]]}을 한 번 더 의식합니다.</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv3">◷</span><b>일이 몰릴 때</b></div><ul><li>마감·중요도·영향도를 기준으로 순서를 다시 정합니다.</li><li>${stressTips[sSorted[0][0]]}</li></ul></div>
+   <div class="situationVisualCard"><div class="svTop"><span class="svIcon sv4">✦</span><b>문제를 발견했을 때</b></div><ul><li>영향 범위와 필요한 공유 시점을 먼저 판단합니다.</li><li>수정할 수 있는 대안을 함께 준비하면 불필요한 불안을 줄일 수 있습니다.</li></ul></div>
+ </div>`;
+ $('growthPlan').innerHTML=`
+ <div class="growthTimeline">
+   <div class="growthStep g1"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">1주차</span><div class="growthCopy"><b>관찰</b><span>${axisNames[high[0]]}을 과하게 쓰는 순간을 한 번 기록합니다.</span></div><span class="growthTag">나의 강점 발견</span></div></div>
+   <div class="growthStep g2"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">2주차</span><div class="growthCopy"><b>작은 보완</b><span>${lowM.need}을 실제 업무 한 건에 적용합니다.</span></div><span class="growthTag">새로운 습관 시도</span></div></div>
+   <div class="growthStep g3"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">3주차</span><div class="growthCopy"><b>스트레스 조정</b><span>${stressNames[sSorted[0][0]]} 부담을 낮출 수 있는 업무조건 하나를 바꿉니다.</span></div><span class="growthTag">더 가벼운 업무</span></div></div>
+   <div class="growthStep g4"><span class="growthDot"></span><div class="growthBox"><span class="weekPill">4주차</span><div class="growthCopy"><b>통합</b><span>내 강점은 유지하되 반대축을 언제 빌릴지 개인 업무원칙 한 문장으로 정리합니다.</span></div><span class="growthTag">지속 가능한 나</span></div></div>
+ </div>`;
  $('methodSummary').innerHTML=`<h3>${edition} 해석 원칙</h3><ul><li>유형명은 6개 연속 점수의 상위 두 축 조합을 기억하기 쉽게 표현한 것입니다.</li><li>${mode==='pro'?'Professional은 36개 성향문항 + 12개 스트레스문항 + 6개 상황판단문항을 사용하며, 상황판단은 성향 점수에 소폭 반영됩니다.':'Quick은 20개 성향문항 + 10개 스트레스문항으로 빠르게 추정합니다.'}</li><li>프로파일 선명도는 상위 축 간 차이와 ${cons!=null?'응답 일관성':'간편판 문항수'}를 이용한 내부 해석지표이며, 통계적 신뢰도 계수나 표준점수가 아닙니다.</li><li>31유형과 문항은 퍼스널 공직생활의 자체 구성 체계입니다. 특정 직무 지식을 요구하지 않으며, Big Five·KOSS·TCI·MBTI 등 기존 검사의 문항이나 점수체계를 복제하지 않습니다.</li></ul><p><b>근거 프레임:</b> KOSHA GUIDE E-G-2-2025, Pletzer & Abrahams (2025), Kepes et al. (2024/2025), WHO (2022), ISO 45003:2021, Khalid & Syed (2024), AERA/APA/NCME의 현행 Testing Standards와 개정 절차를 설계 참고자료로 사용했습니다. 이 근거들은 설계 원칙을 뒷받침하지만, 자체 31유형의 타당화를 대신하지는 않습니다.</p>`;
  if(completed.quick&&completed.pro){renderFinalIntegratedReport();}
  syncReportControls();
