@@ -654,11 +654,50 @@ a{color:var(--teal)}
   .resultHero{border-radius:0 0 24px 24px!important}
 }
 
+
+/* V24 · clickable stage navigation */
+.stageStrip button{
+  appearance:none;-webkit-appearance:none;border:1px solid transparent;
+  font:inherit;font-size:11px;font-weight:900;padding:8px 11px;border-radius:999px;
+  background:#e9efed;color:#6e7e7a;cursor:pointer;transition:.16s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:5px
+}
+.stageStrip button:hover{transform:translateY(-1px);border-color:#c8d9d4;background:#f4f8f6}
+.stageStrip button.active{
+  background:linear-gradient(135deg,#0d766e,#123f41);color:#fff;
+  border-color:#0d766e;box-shadow:0 6px 14px rgba(13,118,110,.18)
+}
+.stageStrip button.complete:not(.active){
+  background:#e3f5ef;color:#176f62;border-color:#c2e5da
+}
+.stageStrip button .stageCount{font-size:9px;font-weight:850;opacity:.82}
+.stageStrip button .stageCheck{
+  width:16px;height:16px;border-radius:50%;display:grid;place-items:center;
+  font-size:9px;background:rgba(255,255,255,.75);color:#0c746b
+}
+.stageStrip button.active .stageCheck{background:rgba(255,255,255,.18);color:#fff}
+.stageNavHint{
+  margin-top:7px;font-size:10px;line-height:1.45;color:#6d7b78;
+  background:#f7faf9;border:1px dashed #d7e3df;border-radius:10px;padding:7px 9px
+}
+.stageNavHint.notice{
+  color:#8b5e1b;background:#fff8ed;border-color:#ecd7b5;font-weight:850
+}
+@media(max-width:760px){
+  body.testing .stageStrip{overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;padding-bottom:2px}
+  body.testing .stageStrip::-webkit-scrollbar{display:none}
+  body.testing .stageStrip button{
+    flex:0 0 auto!important;min-width:max-content;font-size:9px;padding:6px 8px
+  }
+  body.testing .stageStrip button .stageCount{font-size:8px}
+  .stageNavHint{font-size:9px;padding:6px 8px;margin-top:5px}
+}
+
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V23</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V23 · HIGH IMPACT VISUAL REPORT</span></div>
+  <div class="topbar"><div class="brand">퍼스널 공직생활 프로파일 <span style="font-size:11px;color:#7a8784;font-weight:800">V24</span><small>Public Service Workstyle & Stress Profile</small></div><span class="version">DUAL V24 · CLICKABLE STAGE NAVIGATION</span></div>
 
   <section id="intro">
     <div class="hero">
@@ -718,7 +757,7 @@ a{color:var(--teal)}
           <div class="ref"><b>Khalid &amp; Syed (2024)</b><br><span>341개 연구를 검토해 직원 정신건강과 웰빙의 선행요인과 결과를 개인·조직·거시 수준에서 통합적으로 살폈습니다. 본 앱은 스트레스를 개인 특성만으로 설명하지 않는 원칙을 따릅니다.</span><br><a href="https://doi.org/10.1016/j.hrmr.2023.100998" target="_blank" rel="noopener">DOI</a></div>
           <div class="ref"><b>AERA · APA · NCME Testing Standards</b><br><span>현행 권위 기준은 2014판이며, 2024년부터 공동위원회가 차기 개정 작업을 진행하고 있습니다. 본 앱은 타당도·신뢰도·공정성·해석 한계 공개 원칙을 따르되, 자체 규준이 완성되기 전에는 표준화 검사라고 주장하지 않습니다.</span><br><a href="https://www.aera.net/Newsroom/Members-of-the-Joint-Committee-for-the-Revision-of-the-Standards-for-Educational-and-Psychological-Testing-Named" target="_blank" rel="noopener">2024 개정위원회 안내</a></div>
           <h3>전문 서비스 수준으로 가기 위한 검증 로드맵</h3>
-          <p>현재 V23은 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
+          <p>현재 V24는 <b>근거참조형 파일럿 버전</b>입니다. 31유형은 외부 표준검사의 유형을 가져온 것이 아니라 이 앱의 6개 업무축 조합으로 만든 자체 분류체계입니다. 따라서 현재 단계에서 표준화된 성격검사 또는 전문가 검증 완료 검사라고 표현해서는 안 됩니다. 전문가용 표준화 수준으로 가려면 실제 공무원 표본을 통한 문항분석, 내적일관성(omega 등), 재검사 신뢰도, 요인구조, 준거타당도, 집단 간 공정성, 규준·백분위 구축이 필요합니다.</p>
         </div>
       </details>
     </div>
@@ -728,6 +767,7 @@ a{color:var(--teal)}
     <div class="progressHead"><strong id="stageName"></strong><span id="progressText" aria-live="polite"></span></div>
     <div class="bar"><i id="progressBar"></i></div>
     <div class="stageStrip" id="stageStrip"></div>
+    <div class="stageNavHint" id="stageNavHint">위 단계 버튼을 누르면 이미 답한 문항도 다시 열어 수정할 수 있습니다.</div>
     <div class="qcard">
       <div class="qmeta"><span class="qtag" id="qTag"></span><span id="qNo"></span></div>
       <div class="qtext" id="qText" aria-live="polite"></div><div class="hint" id="qHint"></div>
@@ -1027,7 +1067,30 @@ const scaleLabels=[['1','전혀 아니다'],['2','아닌 편이다'],['3','보�
 let mode=null,questions=[],answers=[],idx=0;const completed={quick:null,pro:null};
 
 $('prevBtn').addEventListener('click',()=>{if(idx>0){idx--;renderQ();}});
-$('nextBtn').addEventListener('click',()=>{if(answers[idx]==null)return;if(idx<questions.length-1){idx++;renderQ();}else finish();});
+$('nextBtn').addEventListener('click',()=>{
+  if(answers[idx]==null)return;
+  if(idx<questions.length-1){
+    idx++;
+    renderQ();
+  }else{
+    const firstMissing=answers.findIndex(v=>v==null);
+    if(firstMissing!==-1){
+      idx=firstMissing;
+      renderQ();
+      const hint=$('stageNavHint');
+      if(hint){
+        hint.textContent='아직 응답하지 않은 문항이 있어 해당 문항으로 이동했습니다. 모든 문항에 답하면 결과를 볼 수 있습니다.';
+        hint.classList.add('notice');
+        setTimeout(()=>{
+          hint.textContent='위 단계 버튼을 누르면 이미 답한 문항도 다시 열어 수정할 수 있습니다.';
+          hint.classList.remove('notice');
+        },3200);
+      }
+      return;
+    }
+    finish();
+  }
+});
 
 function isMobileClient(){
   return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent||'') ||
@@ -1255,6 +1318,8 @@ if('serviceWorker' in navigator){
 window.__pplStart=start;
 function start(m){
   mode=m;questions=m==='pro'?pro:quick;answers=Array(questions.length).fill(null);idx=0;
+  const navHint=$('stageNavHint');
+  if(navHint){navHint.textContent='위 단계 버튼을 누르면 이미 답한 문항도 다시 열어 수정할 수 있습니다.';navHint.classList.remove('notice');}
   document.body.classList.add('testing');
   $('reportSheet').classList.add('hidden');
   $('reportBtn').classList.remove('hidden');
@@ -1264,10 +1329,89 @@ function start(m){
   window.scrollTo({top:0,behavior:'auto'});
 }
 function stages(){return [...new Set(questions.map(x=>x.stage))];}
-function renderQ(){const item=questions[idx];$('stageName').textContent=item.stage;$('progressText').textContent=`${mode==='pro'?'Professional':'Quick'} · ${idx+1} / ${questions.length}`;$('progressBar').style.width=`${((idx+1)/questions.length)*100}%`;
- const ss=stages();$('stageStrip').innerHTML=ss.map(x=>`<span class="${x===item.stage?'active':''}">${x}</span>`).join('');$('qTag').textContent=item.tag;$('qNo').textContent=`Q${idx+1}`;$('qText').textContent=item.text;$('qHint').textContent=item.kind==='sjt'?'정답은 없습니다. 실제로 가장 가까운 대응을 고르세요.':'최근 3~6개월의 평소 업무 모습을 기준으로 답하세요. 정답은 없습니다.';
- const area=$('answerArea');area.innerHTML='';if(item.kind==='sjt'){const wrap=document.createElement('div');wrap.className='sjt';item.opts.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='sjtbtn'+(answers[idx]===i?' sel':'');b.innerHTML=`<b>${String.fromCharCode(65+i)}</b>${o[0]}`;b.addEventListener('click',()=>{answers[idx]=i;renderQ();});wrap.appendChild(b)});area.appendChild(wrap)}else{const wrap=document.createElement('div');wrap.className='scale';scaleLabels.forEach(([n,t],i)=>{const b=document.createElement('button');b.type='button';b.className='opt'+(answers[idx]===i+1?' sel':'');b.innerHTML=`<b>${n}</b><small>${t}</small>`;b.addEventListener('click',()=>{answers[idx]=i+1;renderQ();});wrap.appendChild(b)});area.appendChild(wrap)}
- $('prevBtn').disabled=idx===0;$('nextBtn').disabled=answers[idx]==null;$('nextBtn').textContent=idx===questions.length-1?'결과 보기':'다음';window.scrollTo({top:0,behavior:document.body.classList.contains('testing')?'auto':'smooth'});}
+function stageIndexes(stage){
+  return questions.map((q,i)=>q.stage===stage?i:-1).filter(i=>i>=0);
+}
+function jumpToStage(stage){
+  const inds=stageIndexes(stage);
+  if(!inds.length)return;
+  const firstUnanswered=inds.find(i=>answers[i]==null);
+  idx=firstUnanswered!=null?firstUnanswered:inds[0];
+  renderQ();
+  const hint=$('stageNavHint');
+  if(hint){
+    const allDone=inds.every(i=>answers[i]!=null);
+    hint.textContent=allDone
+      ? `${stage} 단계의 기존 답변을 다시 확인하고 수정할 수 있습니다.`
+      : `${stage} 단계의 ${firstUnanswered!=null?'첫 미응답 문항':'첫 문항'}으로 이동했습니다.`;
+    hint.classList.remove('notice');
+  }
+}
+function renderStageStrip(item){
+  const ss=stages();
+  $('stageStrip').innerHTML=ss.map(stage=>{
+    const inds=stageIndexes(stage);
+    const done=inds.filter(i=>answers[i]!=null).length;
+    const total=inds.length;
+    const complete=done===total;
+    const active=stage===item.stage;
+    return `<button type="button" class="${active?'active ':''}${complete?'complete':''}" data-stage="${stage}" aria-pressed="${active?'true':'false'}">
+      ${complete?'<span class="stageCheck">✓</span>':''}<span>${stage}</span><span class="stageCount">${done}/${total}</span>
+    </button>`;
+  }).join('');
+  $('stageStrip').querySelectorAll('button[data-stage]').forEach(btn=>{
+    btn.addEventListener('click',()=>jumpToStage(btn.dataset.stage));
+  });
+}
+function renderQ(){
+ const item=questions[idx];
+ $('stageName').textContent=item.stage;
+ $('progressText').textContent=`${mode==='pro'?'Professional':'Quick'} · ${idx+1} / ${questions.length}`;
+ $('progressBar').style.width=`${((idx+1)/questions.length)*100}%`;
+ renderStageStrip(item);
+ $('qTag').textContent=item.tag;
+ $('qNo').textContent=`Q${idx+1}`;
+ $('qText').textContent=item.text;
+ $('qHint').textContent=item.kind==='sjt'
+   ?'정답은 없습니다. 실제로 가장 가까운 대응을 고르세요.'
+   :'최근 3~6개월의 평소 업무 모습을 기준으로 답하세요. 정답은 없습니다.';
+ const area=$('answerArea');
+ area.innerHTML='';
+ if(item.kind==='sjt'){
+   const wrap=document.createElement('div');
+   wrap.className='sjt';
+   item.opts.forEach((o,i)=>{
+     const b=document.createElement('button');
+     b.type='button';
+     b.className='sjtbtn'+(answers[idx]===i?' sel':'');
+     b.innerHTML=`<b>${String.fromCharCode(65+i)}</b>${o[0]}`;
+     b.addEventListener('click',()=>{answers[idx]=i;renderQ();});
+     wrap.appendChild(b)
+   });
+   area.appendChild(wrap)
+ }else{
+   const wrap=document.createElement('div');
+   wrap.className='scale';
+   scaleLabels.forEach(([n,t],i)=>{
+     const b=document.createElement('button');
+     b.type='button';
+     b.className='opt'+(answers[idx]===i+1?' sel':'');
+     b.innerHTML=`<b>${n}</b><small>${t}</small>`;
+     b.addEventListener('click',()=>{answers[idx]=i+1;renderQ();});
+     wrap.appendChild(b)
+   });
+   area.appendChild(wrap)
+ }
+ $('prevBtn').disabled=idx===0;
+ $('nextBtn').disabled=answers[idx]==null;
+ if(idx===questions.length-1){
+   const hasMissing=answers.some(v=>v==null);
+   $('nextBtn').textContent=hasMissing?'미응답 확인':'결과 보기';
+ }else{
+   $('nextBtn').textContent='다음';
+ }
+ window.scrollTo({top:0,behavior:document.body.classList.contains('testing')?'auto':'smooth'});
+}
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 function scoreLikert(){const sums={},counts={};Object.keys(axisNames).forEach(k=>{sums[k]=0;counts[k]=0});const ss={},sc={};Object.keys(stressNames).forEach(k=>{ss[k]=0;sc[k]=0});
  questions.forEach((item,i)=>{if(item.kind!=='scale')return;let v=answers[i]??3;if(item.rev)v=6-v;if(item.axis){sums[item.axis]+=v;counts[item.axis]++}if(item.stress){ss[item.stress]+=v;sc[item.stress]++}});
